@@ -1,12 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import VideoList from './components/video-list/video-list';
 import Logo from './assets/logo.svg';
 
 function App() {
   const [mode, setMode] = useState('home');
   const [videos, setVideos] = useState([]);
+  const inputRef = React.createRef();
 
-  useEffect(() => {
+  const handlePageMode = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      const target = event.currentTarget;
+      const modeData = target.dataset.mode; // NOTE: 해당 콜백을 이벤트에 등록하려면 태그에 data-mode를 같이 선언해야 함.
+
+      if (mode === modeData) return;
+      setMode(modeData);
+    },
+    [mode]
+  );
+
+  const getPopularVideos = useCallback(() => {
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',
@@ -21,30 +35,61 @@ function App() {
       .catch((error) => console.log('error', error));
   }, []);
 
-  function handlePageMode(event) {
-    event.preventDefault();
+  const getSearchResult = useCallback(
+    (event) => {
+      handlePageMode(event);
 
-    const target = event.currentTarget;
-    const modeData = target.dataset.mode; // NOTE: 해당 콜백을 이벤트에 등록하려면 태그에 data-mode를 같이 선언해야 함.
+      const value = inputRef.current.value;
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+      };
 
-    if (mode === modeData) return;
+      fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${value}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          let videoIdList = result.items.map((item) => `id=${item.id.videoId}`);
 
-    setMode(modeData);
-  }
+          fetch(
+            `https://youtube.googleapis.com/youtube/v3/videos?${videoIdList.join(
+              '&'
+            )}&part=snippet&part=statistics&part=contentDetails&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((result) => setVideos(result.items))
+            .catch((error) => console.log('error', error));
+        })
+        .catch((error) => console.log('error', error));
+
+      // video 모드 구현
+      // 채널 썸네일
+    },
+    [handlePageMode, inputRef]
+  );
+
+  useEffect(() => {
+    getPopularVideos();
+  }, [getPopularVideos]);
 
   return (
     <React.Fragment>
-      <header>
-        <a className="logo" href="./index.html" aria-label="홈">
-          <img src={Logo} alt="유튜브 로고" />
-        </a>
+      <header className="gnb">
+        <h1 className="logo">
+          <a href="./index.html" aria-label="홈">
+            <img src={Logo} alt="유튜브 로고" />
+          </a>
+        </h1>
 
         <form
           className="search-form"
-          onSubmit={handlePageMode}
+          onSubmit={getSearchResult}
           data-mode="search"
         >
-          <input type="text" placeholder="검색" />
+          <input type="text" placeholder="검색" ref={inputRef} />
           <button type="submit">검색</button>
         </form>
       </header>
@@ -69,9 +114,11 @@ function App() {
             }[mode]
           }
 
-          <ol onClick={handlePageMode} data-mode="video">
-            비디오 리스트
-          </ol>
+          <VideoList
+            onPage={handlePageMode}
+            data-mode="video"
+            videos={videos}
+          />
         </div>
       </main>
     </React.Fragment>
