@@ -20,53 +20,123 @@ function App() {
     [mode]
   );
 
-  const getPopularVideos = useCallback(() => {
+  const getPopularVideos = useCallback(async () => {
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',
     };
+    let videoList;
+    let channelIdList;
+    let channelImage = new Map();
 
-    fetch(
-      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&part=contentDetails&maxResults=25&chart=mostPopular&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg',
+    await fetch(
+      `https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&part=snippet&part=statistics&part=contentDetails&maxResults=25&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => setVideos(result.items))
-      .catch((error) => console.log('error', error));
+      .then((data) => {
+        videoList = [...data.items];
+
+        channelIdList = videoList.map((item) => {
+          const { channelId } = item.snippet;
+          channelImage.set(channelId, '');
+
+          return `id=${channelId}`;
+        });
+      });
+
+    await fetch(
+      `https://youtube.googleapis.com/youtube/v3/channels?${channelIdList.join(
+        '&'
+      )}&part=snippet&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        data.items.forEach((item) => {
+          const { id } = item;
+          const { url } = item.snippet.thumbnails.default;
+
+          channelImage.set(id, url);
+        });
+
+        const videos = videoList.map((item) => {
+          const channelId = item.snippet.channelId;
+          const channelUrl = channelImage.get(channelId);
+          return { ...item, channelUrl };
+        });
+
+        setVideos(videos);
+      });
   }, []);
 
   const getSearchResult = useCallback(
-    (event) => {
-      handlePageMode(event);
-
+    async (event) => {
       const value = inputRef.current.value;
       const requestOptions = {
         method: 'GET',
         redirect: 'follow',
       };
 
-      fetch(
+      let videoList;
+      let videoIdList;
+      let channelIdList;
+      let channelImage = new Map();
+
+      handlePageMode(event);
+
+      await fetch(
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${value}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
         requestOptions
       )
         .then((response) => response.json())
-        .then((result) => {
-          let videoIdList = result.items.map((item) => `id=${item.id.videoId}`);
-
-          fetch(
-            `https://youtube.googleapis.com/youtube/v3/videos?${videoIdList.join(
-              '&'
-            )}&part=snippet&part=statistics&part=contentDetails&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-            requestOptions
-          )
-            .then((response) => response.json())
-            .then((result) => setVideos(result.items))
-            .catch((error) => console.log('error', error));
+        .then((data) => {
+          videoIdList = data.items.map((item) => `id=${item.id.videoId}`);
         })
         .catch((error) => console.log('error', error));
 
-      // video 모드 구현
-      // 채널 썸네일
+      await fetch(
+        `https://youtube.googleapis.com/youtube/v3/videos?${videoIdList.join(
+          '&'
+        )}&part=snippet&part=statistics&part=contentDetails&maxResults=25&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          videoList = [...data.items];
+
+          channelIdList = videoList.map((item) => {
+            const { channelId } = item.snippet;
+            channelImage.set(channelId, '');
+
+            return `id=${channelId}`;
+          });
+        })
+        .catch((error) => console.log('error', error));
+
+      await fetch(
+        `https://youtube.googleapis.com/youtube/v3/channels?${channelIdList.join(
+          '&'
+        )}&part=snippet&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          data.items.forEach((item) => {
+            const { id } = item;
+            const { url } = item.snippet.thumbnails.default;
+
+            channelImage.set(id, url);
+          });
+
+          const videos = videoList.map((item) => {
+            const channelId = item.snippet.channelId;
+            const channelUrl = channelImage.get(channelId);
+            return { ...item, channelUrl };
+          });
+
+          setVideos(videos);
+        });
     },
     [handlePageMode, inputRef]
   );
