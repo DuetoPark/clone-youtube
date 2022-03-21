@@ -148,20 +148,141 @@ function App() {
   return (
     <React.Fragment>
       <header className="gnb">
-        <h1 className="logo">
-          <a href="./index.html" aria-label="홈">
-            <img src={Logo} alt="유튜브 로고" />
-          </a>
-        </h1>
+        <div className="gnb-left">
+          {/* flex-direction : row-reverse */}
+          <h1 className="logo">
+            <a href="./index.html" aria-label="홈">
+              <img src={Logo} alt="유튜브 로고" />
+            </a>
+          </h1>
 
-        <form
-          className="search-form"
-          onSubmit={getSearchResult}
-          data-mode="search"
-        >
-          <input type="text" placeholder="검색" ref={inputRef} />
-          <button type="submit">검색</button>
-        </form>
+          <button
+            className="gnb-icon-button is-menu sm-only"
+            aria-label="메뉴 열기"
+            type="button"
+          >
+            <i className="ic-menu" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div className="gnb-right">
+          <button
+            className="gnb-icon-button is-search sm-only"
+            aria-label="검색 창 열기"
+            type="button"
+          >
+            <i className="ic-search" aria-hidden="true"></i>
+          </button>
+
+          <form
+            className="search-form sm-hidden"
+            onSubmit={getSearchResult}
+            data-mode="search"
+          >
+            <div className="input-group">
+              <input type="text" placeholder="검색" ref={inputRef} />
+
+              <button
+                className="gnb-icon-button is-search"
+                aria-label="검색어 찾기"
+                type="submit"
+              >
+                <i className="ic-search" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <button
+              className="gnb-icon-button is-search-voice"
+              aria-label="음성으로 검색하기"
+              type="button"
+            >
+              <i className="ic-voice" aria-hidden="true"></i>
+            </button>
+          </form>
+
+          {/* NOTE: 로그인을 한 경우 */}
+          <div className="button-group sm-only">
+            <button
+              className="profile-button"
+              aria-label="프로필 메뉴 열기"
+              type="button"
+            ></button>
+          </div>
+
+          <div className="button-group sm-hidden">
+            <button
+              className="gnb-icon-button is-upload"
+              aria-label="업로드 메뉴 열기"
+              type="button"
+            >
+              <i className="ic-upload" aria-hidden="true"></i>
+              {/* NOTE: is-active 일 때,
+              <i className="ic-upload-filled" aria-hidden="true"></i> */}
+            </button>
+
+            <button
+              className="gnb-icon-button is-app"
+              aria-label="유튜브 앱 메뉴 열기"
+              type="button"
+            >
+              <i className="ic-app" aria-hidden="true"></i>
+              {/* NOTE: is-active 일 때,
+              <i className="ic-app-filled" aria-hidden="true"></i> */}
+            </button>
+
+            <button
+              className="gnb-icon-button is-alert"
+              aria-label="알림 메뉴 열기"
+              type="button"
+            >
+              <i className="ic-bell" aria-hidden="true"></i>
+              {/* NOTE: is-active 일 때,
+              <i className="ic-bell-filled" aria-hidden="true"></i> */}
+            </button>
+
+            <button
+              className="profile-button"
+              aria-label="프로필 메뉴 열기"
+              type="button"
+            ></button>
+          </div>
+
+          {/* NOTE: 로그인을 하지 않은 경우 */}
+          <div className="button-group sm-only">
+            <button
+              className="gnb-icon-button is-auth"
+              aria-label="로그인"
+              type="button"
+            >
+              <i className="ic-auth" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div className="button-group sm-hidden">
+            <button
+              className="gnb-icon-button is-app"
+              aria-label="유튜브 앱 메뉴 열기"
+              type="button"
+            >
+              <i className="ic-app" aria-hidden="true"></i>
+              {/* NOTE: is-active 일 때,
+              <i className="ic-app-filled" aria-hidden="true"></i> */}
+            </button>
+
+            <button
+              className="gnb-icon-button is-setting"
+              aria-label="설정 열기"
+              type="button"
+            >
+              <i className="ic-more" aria-hidden="true"></i>
+            </button>
+
+            <button className="gnb-icon-button is-auth" type="button">
+              <i className="ic-auth" aria-hidden="true"></i>
+              로그인
+            </button>
+          </div>
+        </div>
       </header>
 
       <main>
