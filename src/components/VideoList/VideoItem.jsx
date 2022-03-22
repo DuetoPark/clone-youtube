@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnail from '../thumbnail';
+import Thumbnail from '../Thumbnail';
 import VideoInfo from './VideoInfo';
 import { StyledVideoCard } from './styles';
 

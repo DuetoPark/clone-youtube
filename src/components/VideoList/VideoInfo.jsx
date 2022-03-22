@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import Avatar from '../avatar/avatar';
+import Avatar from '../Avatar';
 import { StyledVideoInfo } from './styles';
 
 const VideoInfo = (props) => {
