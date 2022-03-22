@@ -1,10 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import VideoList from './components/video-list/video-list';
-import Logo from './assets/logo.svg';
 
-function App() {
+import VideoList from './components/video-list/video-list';
+
+import {
+  Logo,
+  MenuIcon,
+  SearchIcon,
+  AppIcon,
+  AppFilledIcon,
+  VoiceIcon,
+  UploadIcon,
+  UploadFilledIcon,
+  BellIcon,
+  BellFilledIcon,
+  AuthIcon,
+  MoreIcon,
+} from './assets';
+
+const Routes = (props) => {
   const [mode, setMode] = useState('home');
   const [videos, setVideos] = useState([]);
+  const [currentVideoId, setCurrentVideoId] = useState('');
+
   const inputRef = React.createRef();
 
   const handlePageMode = useCallback(
@@ -63,7 +80,7 @@ function App() {
         const videos = videoList.map((item) => {
           const channelId = item.snippet.channelId;
           const channelUrl = channelImage.get(channelId);
-          return { ...item, channelUrl };
+          return { ...item, channelUrl, channelId };
         });
 
         setVideos(videos);
@@ -141,8 +158,81 @@ function App() {
     [handlePageMode, inputRef]
   );
 
+  // const getVideoComments = useCallback(
+  //   (event, id) => {
+  //     handlePageMode(event);
+  //     setCurrentVideoId(id);
+
+  //     const requestOptions = {
+  //       method: 'GET',
+  //       redirect: 'follow',
+  //     };
+
+  //     fetch(
+  //       `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=50&textFormat=plainText&videoId=${currentVideoId}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+  //       requestOptions
+  //     )
+  //       .then((response) => response.json())
+  //       .then((result) => console.log(result))
+  //       .catch((error) => console.log('error', error));
+  //   },
+  //   [currentVideoId, handlePageMode]
+  // );
+
+  const getVideoComments = (event, id) => {
+    handlePageMode(event);
+    setCurrentVideoId(id);
+
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    };
+
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=50&textFormat=plainText&videoId=${currentVideoId}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+  };
+
   useEffect(() => {
     getPopularVideos();
+
+    // const tag = document.createElement('script');
+    // tag.src = 'https://www.youtube.com/iframe_api';
+
+    // const firstScriptTag = document.querySelector('script');
+    // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // let player;
+    // function onYouTubeIframeAPIReady() {
+    //   player = new YT.Player('player', {
+    //     height: '360',
+    //     width: '640',
+    //     videoId: 'M7lc1UVf-VE', // 여기 바꿔야 함.
+    //     events: {
+    //       onReady: onPlayerReady,
+    //       onStateChange: onPlayerStateChange,
+    //     },
+    //   });
+    // }
+
+    // function onPlayerReady(event) {
+    //   event.target.playVideo();
+    // }
+
+    // let done = false;
+    // function onPlayerStateChange(event) {
+    //   if (event.data === YT.PlayerState.PLAYING && !done) {
+    //     setTimeout(stopVideo, 6000);
+    //     done = true;
+    //   }
+    // }
+    // function stopVideo() {
+    //   player.stopVideo();
+    // }
   }, [getPopularVideos]);
 
   return (
@@ -151,8 +241,8 @@ function App() {
         <div className="gnb-left">
           {/* flex-direction : row-reverse */}
           <h1 className="logo">
-            <a href="./index.html" aria-label="홈">
-              <img src={Logo} alt="유튜브 로고" />
+            <a href="./index.html" aria-label="유튜브 홈">
+              <Logo aria-hidden="true" />
             </a>
           </h1>
 
@@ -161,7 +251,7 @@ function App() {
             aria-label="메뉴 열기"
             type="button"
           >
-            <i className="ic-menu" aria-hidden="true"></i>
+            <MenuIcon aria-hidden="true" />
           </button>
         </div>
 
@@ -171,7 +261,7 @@ function App() {
             aria-label="검색 창 열기"
             type="button"
           >
-            <i className="ic-search" aria-hidden="true"></i>
+            <SearchIcon aria-hidden="true" />
           </button>
 
           <form
@@ -187,16 +277,16 @@ function App() {
                 aria-label="검색어 찾기"
                 type="submit"
               >
-                <i className="ic-search" aria-hidden="true"></i>
+                <SearchIcon aria-hidden="true" />
               </button>
             </div>
 
             <button
-              className="gnb-icon-button is-search-voice"
+              className="gnb-icon-button is-voice"
               aria-label="음성으로 검색하기"
               type="button"
             >
-              <i className="ic-voice" aria-hidden="true"></i>
+              <VoiceIcon aria-hidden="true" />
             </button>
           </form>
 
@@ -215,9 +305,9 @@ function App() {
               aria-label="업로드 메뉴 열기"
               type="button"
             >
-              <i className="ic-upload" aria-hidden="true"></i>
-              {/* NOTE: is-active 일 때,
-              <i className="ic-upload-filled" aria-hidden="true"></i> */}
+              <UploadIcon aria-hidden="true" />
+              {/* NOTE: is-active 일 때,*/}
+              <UploadFilledIcon aria-hidden="true" />
             </button>
 
             <button
@@ -225,9 +315,9 @@ function App() {
               aria-label="유튜브 앱 메뉴 열기"
               type="button"
             >
-              <i className="ic-app" aria-hidden="true"></i>
-              {/* NOTE: is-active 일 때,
-              <i className="ic-app-filled" aria-hidden="true"></i> */}
+              <AppIcon aria-hidden="true" />
+              {/* NOTE: is-active 일 때,*/}
+              <AppFilledIcon aria-hidden="true" />
             </button>
 
             <button
@@ -235,9 +325,9 @@ function App() {
               aria-label="알림 메뉴 열기"
               type="button"
             >
-              <i className="ic-bell" aria-hidden="true"></i>
-              {/* NOTE: is-active 일 때,
-              <i className="ic-bell-filled" aria-hidden="true"></i> */}
+              <BellIcon aria-hidden="true" />
+              {/* NOTE: is-active 일 때, */}
+              <BellFilledIcon aria-hidden="true" />
             </button>
 
             <button
@@ -254,7 +344,7 @@ function App() {
               aria-label="로그인"
               type="button"
             >
-              <i className="ic-auth" aria-hidden="true"></i>
+              <AuthIcon aria-hidden="true" />
             </button>
           </div>
 
@@ -264,9 +354,9 @@ function App() {
               aria-label="유튜브 앱 메뉴 열기"
               type="button"
             >
-              <i className="ic-app" aria-hidden="true"></i>
-              {/* NOTE: is-active 일 때,
-              <i className="ic-app-filled" aria-hidden="true"></i> */}
+              <AppIcon aria-hidden="true" />
+              {/* NOTE: is-active 일 때, */}
+              <AppFilledIcon aria-hidden="true" />
             </button>
 
             <button
@@ -274,11 +364,11 @@ function App() {
               aria-label="설정 열기"
               type="button"
             >
-              <i className="ic-more" aria-hidden="true"></i>
+              <MoreIcon aria-hidden="true" />
             </button>
 
             <button className="gnb-icon-button is-auth" type="button">
-              <i className="ic-auth" aria-hidden="true"></i>
+              <AuthIcon aria-hidden="true" />
               로그인
             </button>
           </div>
@@ -291,11 +381,15 @@ function App() {
             {
               home: <nav>왼쪽 메뉴바</nav>,
               search: <nav>왼쪽 메뉴바</nav>,
-              video: <section>iframe이랑 댓글</section>,
+              video: (
+                <section>
+                  video player, comments
+                  <div id="player"></div>
+                </section>
+              ),
             }[mode]
           }
         </div>
-
         <div>
           {
             {
@@ -306,7 +400,7 @@ function App() {
           }
 
           <VideoList
-            onPage={handlePageMode}
+            onPage={getVideoComments}
             data-mode="video"
             videos={videos}
           />
@@ -314,6 +408,6 @@ function App() {
       </main>
     </React.Fragment>
   );
-}
+};
 
-export default App;
+export default Routes;
