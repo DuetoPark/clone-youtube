@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { visuallyHidden } from './styles/utils/common';
+import { visuallyHidden } from './styles/utils';
 
 export const GlobalStyle = createGlobalStyle`
   * {
