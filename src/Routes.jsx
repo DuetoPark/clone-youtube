@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import VideoList from './components/video-list/video-list';
+import VideoList from './components/VideoList';
 
 import {
   Logo,
