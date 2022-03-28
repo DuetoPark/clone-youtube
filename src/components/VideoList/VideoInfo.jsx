@@ -1,5 +1,8 @@
 import React, { useCallback } from 'react';
+
+import { useResponsive } from '../../hooks/useResponsive.js';
 import Avatar from '../Avatar';
+
 import { StyledVideoInfo } from './styles';
 
 const VideoInfo = (props) => {
@@ -34,10 +37,12 @@ const VideoInfo = (props) => {
     [props]
   );
 
+  const { isMobile } = useResponsive();
+
   return (
     <StyledVideoInfo className="video-info">
       <div className="info-left">
-        <Avatar video={props.video} />
+        <Avatar video={props.video} size={isMobile ? 'lg' : 'md'} />
       </div>
 
       <a
