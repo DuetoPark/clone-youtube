@@ -30,7 +30,7 @@ const colors = {
   black: '#000',
   primary: '#030303',
   secondary: '#606060',
-  borderGeneral: 'rgba($black, 0.1)',
+  borderGeneral: 'rgba(0, 0, 0, 0.1)',
   borderDark: '#d3d3d3',
   backgroundGeneral: '#f9f9f9',
   backgroundDark: '#f8f8f8',
