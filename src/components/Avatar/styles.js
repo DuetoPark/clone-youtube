@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { flexbox } from '../../styles/utils';
+import userDefaultImage from '../../assets/images/img-user-default.jpeg';
 
 function getAvatarSize(value) {
   switch (value) {
@@ -20,14 +22,14 @@ function getAvatarSize(value) {
   }
 }
 
-export const StyledAvatar = styled.a`
+export const StyledAvatar = styled.div`
   ${flexbox()}
   display: block;
   width: ${(props) => getAvatarSize(props.size)}px;
   height: ${(props) => getAvatarSize(props.size)}px;
   border-radius: 50%;
   overflow: hidden;
-  background-image: url('~/public/images/img-user-default.jpeg');
+  background-image: url(${userDefaultImage});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
