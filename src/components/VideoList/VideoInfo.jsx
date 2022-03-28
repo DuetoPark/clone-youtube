@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useResponsive } from '../../hooks/useResponsive.js';
+import { useResponsive } from '../../hooks';
 import Avatar from '../Avatar';
 
 import { StyledVideoInfo } from './styles';
@@ -42,7 +42,11 @@ const VideoInfo = (props) => {
   return (
     <StyledVideoInfo className="video-info">
       <div className="info-left">
-        <Avatar video={props.video} size={isMobile ? 'lg' : 'md'} />
+        <Avatar
+          video={props.video}
+          size={isMobile ? 'lg' : 'md'}
+          address="./index.html"
+        />
       </div>
 
       <a
