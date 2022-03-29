@@ -1,14 +1,14 @@
 import { StyledAvatar } from './styles';
 import { Link } from 'react-router-dom';
 
-const Avatar = ({ video, size, address }) => {
+const Avatar = ({ video, size, address, className }) => {
   if (address) {
     if (video.avatarURL) {
       return (
         <StyledAvatar
           as={Link}
           to={address}
-          className="avatar"
+          className={`avatar ${className}`}
           size={size}
           title={video.snippet.channelTitle}
         >
@@ -20,7 +20,7 @@ const Avatar = ({ video, size, address }) => {
         <StyledAvatar
           as={Link}
           to={address}
-          className="avatar"
+          className={`avatar ${className}`}
           size={size}
           title={video.snippet.channelTitle}
         ></StyledAvatar>
@@ -31,7 +31,7 @@ const Avatar = ({ video, size, address }) => {
   if (video.avatarURL) {
     return (
       <StyledAvatar
-        className="avatar"
+        className={`avatar ${className}`}
         type="button"
         size={size}
         title={video.snippet.channelTitle}
@@ -42,7 +42,7 @@ const Avatar = ({ video, size, address }) => {
   }
   return (
     <StyledAvatar
-      className="avatar"
+      className={`avatar ${className}`}
       type="button"
       size={size}
       title={video.snippet.channelTitle}
