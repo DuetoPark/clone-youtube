@@ -1,38 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useResponsive } from '../../hooks';
 
 import Avatar from '../Avatar';
+import GnbSearch from './GnbSearch';
+
 import { StyledGnbIconButton, StyledGlobalHeader } from './styles';
 
 import {
   Logo,
-  MenuIcon,
-  SearchIcon,
   AppIcon,
   AppFilledIcon,
-  VoiceIcon,
-  UploadIcon,
-  UploadFilledIcon,
+  AuthIcon,
   BellIcon,
   BellFilledIcon,
-  AuthIcon,
+  MenuIcon,
   MoreIcon,
+  UploadIcon,
+  UploadFilledIcon,
+  SearchIcon,
+  VoiceIcon,
 } from '../../assets';
+
+const GNB_TOGGLE_BUTTON = ['app', 'upload', 'alert'];
 
 const GlobalHeader = (props) => {
   const { isMobile } = useResponsive();
+  const [globalHeaderMenu, setglobalHeaderMenu] = useState({
+    upload: false,
+    app: false,
+    alert: false,
+  });
+
   const [myChannel, setMyChannel] = useState({
     snippet: {
       channelTitle: 'user',
     },
   });
 
-  function toggleIconButton() {}
+  const toggleIconButton = useCallback((callBackFunc, event) => {
+    const target = event.currentTarget;
+    target.classList.toggle('is-active');
+
+    callBackFunc && callBackFunc();
+  }, []);
+
+  const changeGnbMenuState = useCallback(
+    (event) => {
+      const target = event.currentTarget;
+      const targetClass = target.classList.value;
+      const whichButton =
+        GNB_TOGGLE_BUTTON.filter((item) =>
+          targetClass.includes(`is-${item}`)
+        ).toString() || false;
+
+      setglobalHeaderMenu((state) => {
+        const newGnbMeueState = { ...state };
+        newGnbMeueState[whichButton] = !newGnbMeueState[whichButton];
+        return newGnbMeueState;
+      });
+    },
+    [setglobalHeaderMenu]
+  );
 
   return (
     <StyledGlobalHeader className="gnb">
       <div className="gnb-left">
-        {/* flex-direction : row-reverse */}
         <h1 className="logo">
           <a href="./index.html" aria-label="유튜브 홈">
             <Logo aria-hidden="true" />
@@ -50,25 +82,13 @@ const GlobalHeader = (props) => {
         )}
       </div>
 
-      {!isMobile && (
-        <div className="gnb-center">
-          <form
+      <div className="gnb-center">
+        {!isMobile && (
+          <GnbSearch
             className="search-form"
-            onSubmit={props.onSearch}
-            data-mode="search"
+            onSearch={props.onSearch}
+            inputRef={props.inputRef}
           >
-            <div className="input-group">
-              <input type="text" placeholder="검색" ref={props.inputRef} />
-
-              <StyledGnbIconButton
-                className="gnb-icon-button is-search"
-                aria-label="검색어 찾기"
-                type="submit"
-              >
-                <SearchIcon aria-hidden="true" />
-              </StyledGnbIconButton>
-            </div>
-
             <StyledGnbIconButton
               className="gnb-icon-button is-voice"
               aria-label="음성으로 검색하기"
@@ -76,9 +96,9 @@ const GlobalHeader = (props) => {
             >
               <VoiceIcon aria-hidden="true" />
             </StyledGnbIconButton>
-          </form>
-        </div>
-      )}
+          </GnbSearch>
+        )}
+      </div>
 
       <div className="gnb-right">
         {isMobile && (
@@ -99,38 +119,55 @@ const GlobalHeader = (props) => {
                 className="gnb-icon-button is-upload"
                 aria-label="업로드 메뉴 열기"
                 type="button"
+                onClick={(event) => {
+                  toggleIconButton(changeGnbMenuState.bind(null, event), event);
+                }}
               >
-                <UploadIcon aria-hidden="true" />
-                <UploadFilledIcon aria-hidden="true" />
+                {globalHeaderMenu.upload ? (
+                  <UploadFilledIcon aria-hidden="true" />
+                ) : (
+                  <UploadIcon aria-hidden="true" />
+                )}
               </StyledGnbIconButton>
 
               <StyledGnbIconButton
                 className="gnb-icon-button is-app"
                 aria-label="유튜브 앱 메뉴 열기"
                 type="button"
+                onClick={(event) => {
+                  toggleIconButton(changeGnbMenuState.bind(null, event), event);
+                }}
               >
-                <AppIcon aria-hidden="true" />
-                <AppFilledIcon aria-hidden="true" />
+                {globalHeaderMenu.app ? (
+                  <AppFilledIcon aria-hidden="true" />
+                ) : (
+                  <AppIcon aria-hidden="true" />
+                )}
               </StyledGnbIconButton>
 
               <StyledGnbIconButton
                 className="gnb-icon-button is-alert"
                 aria-label="알림 메뉴 열기"
                 type="button"
+                onClick={(event) => {
+                  toggleIconButton(changeGnbMenuState.bind(null, event), event);
+                }}
               >
-                <BellIcon aria-hidden="true" />
-                <BellFilledIcon aria-hidden="true" />
+                {globalHeaderMenu.alert ? (
+                  <BellFilledIcon aria-hidden="true" />
+                ) : (
+                  <BellIcon aria-hidden="true" />
+                )}
               </StyledGnbIconButton>
             </>
           )}
 
-          <button
+          <Avatar
             className="profile-button"
             aria-label="프로필 메뉴 열기"
-            type="button"
-          >
-            <Avatar video={myChannel} size={isMobile ? 'xs' : 'sm'} />
-          </button>
+            video={myChannel}
+            size={isMobile ? 'xs' : 'sm'}
+          />
         </div> */}
 
         {/* NOTE: 로그인을 하지 않은 경우 */}
@@ -148,15 +185,22 @@ const GlobalHeader = (props) => {
               className="gnb-icon-button is-app"
               aria-label="유튜브 앱 메뉴 열기"
               type="button"
+              onClick={(event) => {
+                toggleIconButton(changeGnbMenuState.bind(null, event), event);
+              }}
             >
-              <AppIcon aria-hidden="true" />
-              <AppFilledIcon aria-hidden="true" />
+              {globalHeaderMenu.app ? (
+                <AppFilledIcon aria-hidden="true" />
+              ) : (
+                <AppIcon aria-hidden="true" />
+              )}
             </StyledGnbIconButton>
 
             <StyledGnbIconButton
               className="gnb-icon-button is-setting"
               aria-label="설정 열기"
               type="button"
+              onClick={toggleIconButton}
             >
               <MoreIcon aria-hidden="true" />
             </StyledGnbIconButton>
