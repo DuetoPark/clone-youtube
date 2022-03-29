@@ -22,7 +22,7 @@ function getAvatarSize(value) {
   }
 }
 
-export const StyledAvatar = styled.div`
+export const StyledAvatar = styled.button`
   ${flexbox()}
   display: block;
   width: ${(props) => getAvatarSize(props.size)}px;
