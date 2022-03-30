@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useResponsive } from '../../hooks';
 
 import Avatar from '../Avatar';
@@ -66,9 +68,9 @@ const GlobalHeader = (props) => {
     <StyledGlobalHeader className="gnb">
       <div className="gnb-left">
         <h1 className="logo">
-          <a href="./index.html" aria-label="유튜브 홈">
+          <Link to="/" aria-label="유튜브 홈">
             <Logo aria-hidden="true" />
-          </a>
+          </Link>
         </h1>
 
         {!isMobile && (

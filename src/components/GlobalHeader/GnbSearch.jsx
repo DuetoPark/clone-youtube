@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { CloseIcon, SearchIcon } from '../../assets';
 import { StyledGnbIconButton, StyledGnbSearch } from './styles';
 
 const GnbSearch = (props) => {
+  let navigate = useNavigate();
+
+  const handleSubmit = useCallback(
+    (event) => {
+      props.onSearch(event);
+      navigate('/search');
+    },
+    [props, navigate]
+  );
+
   return (
-    <StyledGnbSearch onSubmit={props.onSearch} data-mode="search">
+    <StyledGnbSearch onSubmit={handleSubmit} data-mode="search">
       <div className="input-group">
         <input type="text" placeholder="검색" ref={props.inputRef} />
 

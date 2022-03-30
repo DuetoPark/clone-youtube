@@ -1,4 +1,6 @@
 import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
+
 import { StyledThumbnail } from './styles';
 
 const Thumbnail = (props) => {
@@ -37,20 +39,17 @@ const Thumbnail = (props) => {
     }
   }
 
-  const getVideoComments = useCallback(
-    (event) => {
-      const { id } = props.video;
-      props.onPage(event, id);
-    },
-    [props]
-  );
+  const getVideoComments = useCallback(() => {
+    const { id } = props.video;
+    props.onPage(id);
+  }, [props]);
 
   return (
     <StyledThumbnail
-      href="./index.html"
+      as={Link}
+      to="/video"
       className="thumbnail"
       onClick={getVideoComments}
-      data-mode="video"
     >
       <img
         src={props.video.snippet.thumbnails.high.url}

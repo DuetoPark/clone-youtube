@@ -6,14 +6,14 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles';
 import { GlobalStyle } from './globalStyles';
 
-import Routes from './Routes';
+import RouteWrapper from './Routes';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Routes />
+        <RouteWrapper />
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

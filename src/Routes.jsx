@@ -1,28 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Routes, Route } from 'react-router';
 
 import GlobalHeader from './components/GlobalHeader';
 import VideoList from './components/VideoList';
 
-const Routes = (props) => {
-  const [mode, setMode] = useState('home');
+import VideoRecommendationPage from './pages/VideoRecommendation';
+import SearchResultPage from './pages/SearchResult';
+import VideoViewPage from './pages/VideoView';
+
+const RouteWrapper = (props) => {
   const [videos, setVideos] = useState([]);
-  // const [, setVideos] = useState([]);
   const [currentVideoId, setCurrentVideoId] = useState('');
 
   const inputRef = React.createRef();
-
-  const handlePageMode = useCallback(
-    (event) => {
-      event.preventDefault();
-
-      const target = event.currentTarget;
-      const modeData = target.dataset.mode; // NOTE: 해당 콜백을 이벤트에 등록하려면 태그에 data-mode를 같이 선언해야 함.
-
-      if (mode === modeData) return;
-      setMode(modeData);
-    },
-    [mode]
-  );
 
   const getPopularVideos = useCallback(async () => {
     const requestOptions = {
@@ -76,6 +66,8 @@ const Routes = (props) => {
 
   const getSearchResult = useCallback(
     async (event) => {
+      event.preventDefault();
+
       const value = inputRef.current.value;
       const requestOptions = {
         method: 'GET',
@@ -86,8 +78,6 @@ const Routes = (props) => {
       let videoIdList;
       let channelIdList;
       let avatarImage = new Map();
-
-      handlePageMode(event);
 
       await fetch(
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${value}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
@@ -142,11 +132,10 @@ const Routes = (props) => {
           setVideos(videos);
         });
     },
-    [handlePageMode, inputRef]
+    [inputRef]
   );
 
-  const getVideoComments = (event, id) => {
-    handlePageMode(event);
+  const getVideoComments = (id) => {
     setCurrentVideoId(id);
 
     const requestOptions = {
@@ -170,39 +159,18 @@ const Routes = (props) => {
   return (
     <React.Fragment>
       <GlobalHeader onSearch={getSearchResult} inputRef={inputRef} />
-      <main>
-        <div>
-          {
-            {
-              home: <nav>왼쪽 메뉴바</nav>,
-              search: <nav>왼쪽 메뉴바</nav>,
-              video: (
-                <section>
-                  video player, comments
-                  <div id="player"></div>
-                </section>
-              ),
-            }[mode]
-          }
-        </div>
-        <div>
-          {
-            {
-              home: <div>태그</div>,
-              search: <div>필터</div>,
-              video: <div>태그</div>,
-            }[mode]
-          }
 
-          <VideoList
-            onPage={getVideoComments}
-            data-mode="video"
-            videos={videos}
-          />
-        </div>
-      </main>
+      <Routes>
+        <Route path="/" element={<VideoRecommendationPage />}></Route>
+        <Route path="/search" element={<SearchResultPage />}></Route>
+        <Route path="/video" element={<VideoViewPage />}></Route>
+      </Routes>
+
+      <div>
+        <VideoList onPage={getVideoComments} videos={videos} />
+      </div>
     </React.Fragment>
   );
 };
 
-export default Routes;
+export default RouteWrapper;
