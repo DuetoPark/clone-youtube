@@ -1,11 +1,5 @@
 import styled from 'styled-components';
-import {
-  flexbox,
-  media,
-  positionCenter,
-  positionCenterY,
-  textStyle,
-} from '../../styles/utils';
+import { flexbox, media, positionCenterY, textStyle } from '../../styles/utils';
 
 const GNB_HEIGHT_MOBILE = 48;
 const GNB_HEIGHT_TABLET = 56;
@@ -23,21 +17,21 @@ export const StyledGlobalHeader = styled.header`
 
   .gnb-left {
     ${flexbox('start')}
+    flex-grow: 0;
+    flex-shrink: 0;
     flex-direction: row-reverse;
 
     .logo a {
-      ${flexbox('start')}
+      ${flexbox()};
       height: ${GNB_HEIGHT_MOBILE}px;
       padding: 0 12px;
-    }
-
-    .gnb-icon-button {
-      margin-right: 4px;
     }
   }
 
   .gnb-right {
     ${flexbox('end')}
+    flex-grow: 0;
+    flex-shrink: 0;
 
     .auth-button {
       width: ${GNB_HEIGHT_MOBILE}px;
@@ -72,26 +66,26 @@ export const StyledGlobalHeader = styled.header`
 
     .gnb-left {  
       .logo a {
-          height: ${GNB_HEIGHT_MOBILE}px;
+          height: ${GNB_HEIGHT_TABLET}px;
           padding-right: 14px;
-          padding-left: 16px;
-      }
-  
-      .gnb-icon-button {
-        margin-right: 0;
+          padding-left: 8px;
+          margin-left: 8px;
       }
     }
 
     .gnb-center {
-      flex-grow: 1;
-      margin-left: 78px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: 728px;
+      padding-left: 78px;
 
-      .search-form,
-      .search-form .input-group {
-        ${flexbox('start')};
+      .input-group {
+        max-width: 600px;
       }
 
-      .is-voice {
+      .gnb-icon-button.is-voice {
+        flex-grow: 0;
+        flex-shrink: 0;
         background-color: ${({ theme }) => theme.colors.backgroundGeneral};
       }
     }
@@ -132,15 +126,15 @@ export const StyledGlobalHeader = styled.header`
         width: auto;
         height: 40px;
         padding: 0 11px;
-        color: ${({ theme }) => theme.colors.blue};
         border-radius: 2px;
         border: 1px solid ${({ theme }) => theme.colors.blue};
+        color: ${({ theme }) => theme.colors.blue};
 
         &:hover {
           background-color: ${({ theme }) => theme.colors.borderGeneral};
         }
 
-        svg {
+        .ic-auth {
           margin-right: 8px;
         }
       }
@@ -182,19 +176,21 @@ export const StyledGnbSearch = styled.form`
 
   .input-group {
     ${flexbox('start')}
-    position: relative;
     flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
     height: 40px;
     margin-right: 8px;
 
     input,
-    button {
+    .gnb-icon-button {
       border: 1px solid ${({ theme }) => theme.colors.borderDark};
     }
 
     input {
       ${textStyle('lg')}
       flex-grow: 1;
+      flex-shrink: 1;
       height: 40px;
       padding-left: 6px;
       padding-right: ${GNB_ICON_SIZE_TABLET}px;
@@ -212,38 +208,36 @@ export const StyledGnbSearch = styled.form`
       }
     }
 
-    .gnb-icon-button {
-      &.is-delete {
-        ${positionCenterY()};
-        right: ${SEARCH_BUTTON_WIDTH + DELETE_BUTTON_MARGIN}px;
-        width: 28px;
-        height: 28px;
-        border: 0;
-        color: ${({ theme }) => theme.colors.secondary};
+    .search-button {
+      flex-grow: 0;
+      flex-shrink: 0;
+      width: 64px;
+      background-color: ${({ theme }) => theme.colors.backgroundDark};
+      border-left: 0;
+      border-radius: 0 2px 2px 0;
 
-        &:hover,
-        &:active {
-          color: ${({ theme }) => theme.colors.primary};
-        }
+      &:hover,
+      &:active {
+        background-color: ${({ theme }) => theme.colors.borderGeneral};
+      }
+    }
 
-        svg {
-          width: 20px;
-          height: 20px;
-        }
+    .delete-button {
+      ${positionCenterY()};
+      right: ${SEARCH_BUTTON_WIDTH + DELETE_BUTTON_MARGIN}px;
+      width: 28px;
+      height: 28px;
+      border: 0;
+      color: ${({ theme }) => theme.colors.secondary};
+
+      &:hover,
+      &:active {
+        color: ${({ theme }) => theme.colors.primary};
       }
 
-      &.is-search {
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 64px;
-        background-color: ${({ theme }) => theme.colors.backgroundDark};
-        border-left: 0;
-        border-radius: 0 2px 2px 0;
-
-        &:hover,
-        &:active {
-          background-color: ${({ theme }) => theme.colors.borderGeneral};
-        }
+      .ic-delete {
+        width: 20px;
+        height: 20px;
       }
     }
   }

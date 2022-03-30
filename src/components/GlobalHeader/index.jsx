@@ -206,7 +206,7 @@ const GlobalHeader = (props) => {
             </StyledGnbIconButton>
 
             <button className="auth-button" type="button">
-              <AuthIcon aria-hidden="true" />
+              <AuthIcon className="ic-auth" aria-hidden="true" />
               로그인
             </button>
           </div>

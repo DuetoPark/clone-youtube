@@ -10,15 +10,15 @@ const GnbSearch = (props) => {
         <input type="text" placeholder="검색" ref={props.inputRef} />
 
         <StyledGnbIconButton
-          className="gnb-icon-button is-delete"
+          className="gnb-icon-button delete-button"
           aria-label="검색어 삭제"
           type="button"
         >
-          <CloseIcon aria-hidden="true" />
+          <CloseIcon className="ic-delete" aria-hidden="true" />
         </StyledGnbIconButton>
 
         <StyledGnbIconButton
-          className="gnb-icon-button is-search"
+          className="gnb-icon-button search-button"
           aria-label="검색어 찾기"
           type="submit"
         >
