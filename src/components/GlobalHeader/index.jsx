@@ -39,16 +39,10 @@ const GlobalHeader = (props) => {
     },
   });
 
-  const toggleIconButton = useCallback((callBackFunc, event) => {
-    const target = event.currentTarget;
-    target.classList.toggle('is-active');
-
-    callBackFunc && callBackFunc();
-  }, []);
 
   const changeGnbMenuState = useCallback(
     (event) => {
-      const target = event.currentTarget;
+      const target = event.target;
       const targetClass = target.classList.value;
       const whichButton =
         GNB_TOGGLE_BUTTON.filter((item) =>

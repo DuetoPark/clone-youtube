@@ -152,13 +152,26 @@ const RouteWrapper = (props) => {
     //   .catch((error) => console.log('error', error));
   };
 
+  const toggleButton = useCallback((callBackFunc, event) => {
+    const target = event.target;
+
+    if (!target.matches('.gnb-icon-button')) return;
+    target.classList.toggle('is-active');
+
+    callBackFunc && callBackFunc();
+  }, []);
+
   useEffect(() => {
     getPopularVideos();
   }, [getPopularVideos]);
 
   return (
     <React.Fragment>
-      <GlobalHeader onSearch={getSearchResult} inputRef={inputRef} />
+      <GlobalHeader
+        onSearch={getSearchResult}
+        inputRef={inputRef}
+        onButton={toggleButton}
+      />
 
       <Routes>
         <Route path="/" element={<VideoRecommendationPage />}></Route>
