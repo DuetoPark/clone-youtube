@@ -39,6 +39,31 @@ const GlobalHeader = (props) => {
     },
   });
 
+  const getIcon = useCallback(
+    (text) => {
+      const { upload, app, alert } = globalHeaderMenu;
+
+      switch (text) {
+        case 'upload':
+          if (upload) {
+            return <UploadFilledIcon aria-hidden="true" />;
+          }
+          return <UploadIcon aria-hidden="true" />;
+        case 'app':
+          if (app) {
+            return <AppFilledIcon aria-hidden="true" />;
+          }
+          return <AppIcon aria-hidden="true" />;
+        case 'alert':
+          if (alert) {
+            return <BellFilledIcon aria-hidden="true" />;
+          }
+          return <BellIcon aria-hidden="true" />;
+        default:
+      }
+    },
+    [globalHeaderMenu]
+  );
 
   const changeGnbMenuState = useCallback(
     (event) => {
@@ -121,11 +146,7 @@ const GlobalHeader = (props) => {
                 aria-label="업로드 메뉴 열기"
                 type="button"
               >
-                {globalHeaderMenu.upload ? (
-                  <UploadFilledIcon aria-hidden="true" />
-                ) : (
-                  <UploadIcon aria-hidden="true" />
-                )}
+                {getIcon('upload')}
               </StyledGnbIconButton>
 
               <StyledGnbIconButton
@@ -133,11 +154,7 @@ const GlobalHeader = (props) => {
                 aria-label="유튜브 앱 메뉴 열기"
                 type="button"
               >
-                {globalHeaderMenu.app ? (
-                  <AppFilledIcon aria-hidden="true" />
-                ) : (
-                  <AppIcon aria-hidden="true" />
-                )}
+                {getIcon('app')}
               </StyledGnbIconButton>
 
               <StyledGnbIconButton
@@ -145,11 +162,7 @@ const GlobalHeader = (props) => {
                 aria-label="알림 메뉴 열기"
                 type="button"
               >
-                {globalHeaderMenu.alert ? (
-                  <BellFilledIcon aria-hidden="true" />
-                ) : (
-                  <BellIcon aria-hidden="true" />
-                )}
+                {getIcon('alert')}
               </StyledGnbIconButton>
             </>
           )}
@@ -183,11 +196,7 @@ const GlobalHeader = (props) => {
               aria-label="유튜브 앱 메뉴 열기"
               type="button"
             >
-              {globalHeaderMenu.app ? (
-                <AppFilledIcon aria-hidden="true" />
-              ) : (
-                <AppIcon aria-hidden="true" />
-              )}
+              {getIcon('app')}
             </StyledGnbIconButton>
 
             <StyledGnbIconButton
