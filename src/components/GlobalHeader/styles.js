@@ -153,6 +153,10 @@ export const StyledGnbIconButton = styled.button`
     color: ${({ theme }) => theme.colors.borderDark};
   }
 
+  svg {
+    pointer-events: none;
+  }
+
   &.is-upload {
     svg {
       position: relative;
