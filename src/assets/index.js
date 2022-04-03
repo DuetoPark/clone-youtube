@@ -48,6 +48,8 @@ export { ReactComponent as LogoutIcon } from './icons/logout.svg';
 export { ReactComponent as MenuIcon } from './icons/menu.svg';
 export { ReactComponent as MinusIcon } from './icons/minus.svg';
 export { ReactComponent as MoreIcon } from './icons/more.svg';
+export { ReactComponent as MovieIcon } from './icons/movie.svg';
+export { ReactComponent as MovieFilledIcon } from './icons/movie-filled.svg';
 export { ReactComponent as MusicIcon } from './icons/music.svg';
 export { ReactComponent as MyVideoIcon } from './icons/my-video.svg';
 export { ReactComponent as NextIcon } from './icons/next.svg';
