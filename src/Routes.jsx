@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router';
 
 import GlobalHeader from './components/GlobalHeader';
 import VideoList from './components/VideoList';
+import Sidebar from './components/Sidebar';
 
 import VideoRecommendationPage from './pages/VideoRecommendation';
 import SearchResultPage from './pages/SearchResult';
@@ -275,6 +276,13 @@ const RouteWrapper = (props) => {
         <Route path="/search" element={<SearchResultPage />}></Route>
         <Route path="/video" element={<VideoViewPage />}></Route>
       </Routes>
+
+      <Sidebar
+        menu={menu}
+        onHome={getPopularVideos}
+        onMenu={changeMenuState}
+        callBackFunc={toggleButton}
+      />
 
       <div>
         <VideoList onPage={getVideoComments} videos={videos} />
