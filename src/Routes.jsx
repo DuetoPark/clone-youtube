@@ -11,6 +11,56 @@ import VideoViewPage from './pages/VideoView';
 const RouteWrapper = (props) => {
   const [videos, setVideos] = useState([]);
   const [currentVideoId, setCurrentVideoId] = useState('');
+  const [currentActiveMenu, setCurrentActiveMenu] = useState('');
+  const [menu, setMenu] = useState({
+    gnb: [
+      { id: 1, category: 'upload', active: false },
+      { id: 2, category: 'app', active: false },
+      { id: 3, category: 'alert', active: false },
+    ],
+    main: [
+      { id: 1, category: '홈', active: true },
+      { id: 2, category: '탐색', active: false },
+      { id: 3, category: 'Shorts', active: false },
+      { id: 4, category: '구독', active: false },
+    ],
+    history: [
+      { id: 1, category: '보관함', active: false },
+      { id: 2, category: '시청 기록', active: false },
+      { id: 3, category: '내 동영상', active: false },
+      { id: 4, category: '나중에 볼 동영상', active: false },
+      { id: 5, category: '좋아요 표시한 동영상', active: false },
+    ],
+    popular: [
+      { id: 1, category: '음악', active: false },
+      { id: 2, category: '스포츠', active: false },
+      { id: 3, category: '게임', active: false },
+      { id: 4, category: '영화', active: false },
+      { id: 5, category: '뉴스', active: false },
+      { id: 6, category: '실시간', active: false },
+      { id: 7, category: '학습', active: false },
+      { id: 8, category: '360° 동영상', active: false },
+    ],
+    find: [{ id: 1, category: '채널 탐색' }],
+    moreNotUser: [
+      { id: 1, category: 'YouTube Primium' },
+      { id: 2, category: '실시간' },
+    ],
+    moreUser: [
+      { id: 1, category: 'YouTube Primium' },
+      { id: 2, category: '영화', active: false },
+      { id: 3, category: '게임', active: false },
+      { id: 4, category: '실시간', active: false },
+      { id: 5, category: '학습', active: false },
+      { id: 6, category: '스포츠', active: false },
+    ],
+    service: [
+      { id: 1, category: '설정' },
+      { id: 2, category: '신고 기록' },
+      { id: 3, category: '고객센터' },
+      { id: 4, category: '의견 보내기' },
+    ],
+  });
 
   const inputRef = React.createRef();
 
@@ -152,14 +202,58 @@ const RouteWrapper = (props) => {
     //   .catch((error) => console.log('error', error));
   };
 
-  const toggleButton = useCallback((callBackFunc, event) => {
-    const target = event.target;
+  const toggleButton = useCallback(
+    (event) => {
+      let lastMenu;
 
-    if (!target.matches('.gnb-icon-button')) return;
-    target.classList.toggle('is-active');
+      if (currentActiveMenu) {
+        lastMenu = currentActiveMenu;
+        currentActiveMenu.classList.remove('is-active');
+      } else {
+        lastMenu = document.querySelector('.main-menu-item.is-active');
+      }
 
-    callBackFunc && callBackFunc();
-  }, []);
+      const target = event.target;
+      let currentMenu;
+
+      if (target.matches('.gnb-icon-button')) {
+        currentMenu = event.target;
+      } else {
+        currentMenu = event.target.parentElement;
+      }
+
+      lastMenu.classList.remove('is-active');
+      currentMenu.classList.add('is-active');
+      setCurrentActiveMenu(currentMenu);
+    },
+    [currentActiveMenu]
+  );
+
+  const changeMenuState = useCallback(
+    (callbackFunc, event) => {
+      const target = event.target;
+      const { category, menu } = target.dataset || false;
+
+      if (!category || !menu) return;
+
+      setMenu((state) => {
+        const newMenu = state[menu].map((item) => {
+          if (item.category === category) {
+            return { ...item, active: !item.active };
+          }
+          return { ...item, active: item.active && false };
+        });
+
+        const newState = { ...state };
+        newState[menu] = newMenu;
+
+        return newState;
+      });
+
+      callbackFunc && callbackFunc();
+    },
+    [setMenu]
+  );
 
   useEffect(() => {
     getPopularVideos();
@@ -168,9 +262,12 @@ const RouteWrapper = (props) => {
   return (
     <React.Fragment>
       <GlobalHeader
-        onSearch={getSearchResult}
         inputRef={inputRef}
-        onButton={toggleButton}
+        menuItems={menu.gnb}
+        onHome={getPopularVideos}
+        onSearch={getSearchResult}
+        onButton={changeMenuState}
+        callBackFunc={toggleButton}
       />
 
       <Routes>
