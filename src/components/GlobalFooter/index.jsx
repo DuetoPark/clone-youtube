@@ -5,20 +5,20 @@ import StyledGlobalFooter from './styles';
 
 const guideLink = {
   primary: [
-    { id: 1, value: '정보' },
-    { id: 2, value: '보도자료' },
-    { id: 3, value: '저작권' },
-    { id: 4, value: '문의하기' },
-    { id: 5, value: '크리에이터' },
-    { id: 6, value: '광고' },
-    { id: 7, value: '개발자' },
+    '정보',
+    '보도자료',
+    '저작권',
+    '문의하기',
+    '크리에이터',
+    '광고',
+    '개발자',
   ],
   secondary: [
-    { id: 1, value: '약관' },
-    { id: 2, value: '개인정보처리방침' },
-    { id: 3, value: '정책 및 안전' },
-    { id: 4, value: 'YouTube 작동의 원리' },
-    { id: 5, value: '새로운 기능 테스트하기' },
+    '약관',
+    '개인정보처리방침',
+    '정책 및 안전',
+    'YouTube 작동의 원리',
+    '새로운 기능 테스트하기',
   ],
 };
 
@@ -37,13 +37,21 @@ const GlobalFooter = memo((props) => {
     <StyledGlobalFooter className="sidebar-footer">
       <div className="guide-link-group is-primary">
         {guideLink.primary.map((item) => {
-          return <Link to="/">{item.value}</Link>;
+          return (
+            <Link key={item} to="/">
+              {item}
+            </Link>
+          );
         })}
       </div>
 
       <div className="guide-link-group is-secondary">
         {guideLink.secondary.map((item) => {
-          return <Link to="/">{item.value}</Link>;
+          return (
+            <Link key={item} to="/">
+              {item}
+            </Link>
+          );
         })}
       </div>
 
