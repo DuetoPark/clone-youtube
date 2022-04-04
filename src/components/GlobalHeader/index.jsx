@@ -23,71 +23,60 @@ import {
   VoiceIcon,
 } from '../../assets';
 
-const GNB_TOGGLE_BUTTON = ['app', 'upload', 'alert'];
-
 const GlobalHeader = (props) => {
   const { isMobile } = useResponsive();
-  const [globalHeaderMenu, setglobalHeaderMenu] = useState({
-    upload: false,
-    app: false,
-    alert: false,
-  });
-
   const [myChannel, setMyChannel] = useState({
     snippet: {
       channelTitle: 'user',
     },
   });
 
-  const getIcon = useCallback(
-    (text) => {
-      const { upload, app, alert } = globalHeaderMenu;
+  const getIcon = useCallback((category, active) => {
+    switch (category) {
+      case 'upload':
+        if (active) {
+          return <UploadFilledIcon aria-hidden="true" />;
+        }
+        return <UploadIcon aria-hidden="true" />;
+      case 'app':
+        if (active) {
+          return <AppFilledIcon aria-hidden="true" />;
+        }
+        return <AppIcon aria-hidden="true" />;
+      case 'alert':
+        if (active) {
+          return <BellFilledIcon aria-hidden="true" />;
+        }
+        return <BellIcon aria-hidden="true" />;
+      default:
+    }
+  }, []);
 
-      switch (text) {
-        case 'upload':
-          if (upload) {
-            return <UploadFilledIcon aria-hidden="true" />;
-          }
-          return <UploadIcon aria-hidden="true" />;
-        case 'app':
-          if (app) {
-            return <AppFilledIcon aria-hidden="true" />;
-          }
-          return <AppIcon aria-hidden="true" />;
-        case 'alert':
-          if (alert) {
-            return <BellFilledIcon aria-hidden="true" />;
-          }
-          return <BellIcon aria-hidden="true" />;
-        default:
-      }
+  const handleGnbButton = useCallback(
+    (event) => {
+      const changeMenuState = props.onButton;
+      const toggleButton = props.callBackFunc;
+      changeMenuState(toggleButton.bind(null, event), event);
     },
-    [globalHeaderMenu]
+    [props]
   );
 
-  const changeGnbMenuState = useCallback(
-    (event) => {
-      const target = event.target;
-      const targetClass = target.classList.value;
-      const whichButton =
-        GNB_TOGGLE_BUTTON.filter((item) =>
-          targetClass.includes(`is-${item}`)
-        ).toString() || false;
+  const getMenuState = useCallback(
+    (category) => {
+      const menuData = props.menuItems.filter(
+        (item) => item.category === category
+      );
 
-      setglobalHeaderMenu((state) => {
-        const newGnbMeueState = { ...state };
-        newGnbMeueState[whichButton] = !newGnbMeueState[whichButton];
-        return newGnbMeueState;
-      });
+      return menuData[0].active;
     },
-    [setglobalHeaderMenu]
+    [props]
   );
 
   return (
     <StyledGlobalHeader className="gnb">
       <div className="gnb-left">
         <h1 className="logo">
-          <Link to="/" aria-label="유튜브 홈">
+          <Link to="/" onClick={props.onHome} aria-label="유튜브 홈">
             <Logo aria-hidden="true" />
           </Link>
         </h1>
@@ -135,8 +124,7 @@ const GlobalHeader = (props) => {
         {/* NOTE: 로그인을 한 경우 */}
         {/* <div
             className="button-group"
-            onClick={(event) => {
-              props.onButton(changeGnbMenuState.bind(null, event), event);
+            onClick={handleGnbButton};
             }}
           >
           {!isMobile && (
@@ -146,7 +134,7 @@ const GlobalHeader = (props) => {
                 aria-label="업로드 메뉴 열기"
                 type="button"
               >
-                {getIcon('upload')}
+                {getIcon('upload', getMenuState('upload'))}
               </StyledGnbIconButton>
 
               <StyledGnbIconButton
@@ -154,7 +142,7 @@ const GlobalHeader = (props) => {
                 aria-label="유튜브 앱 메뉴 열기"
                 type="button"
               >
-                {getIcon('app')}
+                {getIcon('app', getMenuState('app'))}
               </StyledGnbIconButton>
 
               <StyledGnbIconButton
@@ -162,7 +150,7 @@ const GlobalHeader = (props) => {
                 aria-label="알림 메뉴 열기"
                 type="button"
               >
-                {getIcon('alert')}
+                {getIcon('alert', getMenuState('alert'))}
               </StyledGnbIconButton>
             </>
           )}
@@ -185,18 +173,15 @@ const GlobalHeader = (props) => {
         )}
 
         {!isMobile && (
-          <div
-            className="button-group"
-            onClick={(event) => {
-              props.onButton(changeGnbMenuState.bind(null, event), event);
-            }}
-          >
+          <div className="button-group" onClick={handleGnbButton}>
             <StyledGnbIconButton
               className="gnb-icon-button is-app"
               aria-label="유튜브 앱 메뉴 열기"
               type="button"
+              data-category="app"
+              data-menu="gnb"
             >
-              {getIcon('app')}
+              {getIcon('app', getMenuState('app'))}
             </StyledGnbIconButton>
 
             <StyledGnbIconButton
