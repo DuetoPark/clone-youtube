@@ -30,17 +30,22 @@ const colors = {
   black: '#000',
   primary: '#030303',
   secondary: '#606060',
+  tertiary: '#909090',
   borderGeneral: 'rgba(0, 0, 0, 0.1)',
   borderDark: '#d3d3d3',
   backgroundGeneral: '#f9f9f9',
   backgroundDark: '#f8f8f8',
+  backgroundActive: 'rgba(0, 0, 0, 0.1)',
+  backgroundHover: 'rgba(0,0,0, 0.05)',
   white: '#fff',
   blue: '#065fd4',
   red: '#cc0000',
   green: '#107516',
 };
 
-const levels = {};
+const levels = {
+  sidebar: 10,
+};
 
 export const gutter = '10px';
 
