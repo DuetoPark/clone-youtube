@@ -5,7 +5,7 @@ import { StyledMiniSidebar } from './styles';
 
 const MiniSidebar = (props) => {
   return (
-    <StyledMiniSidebar>
+    <StyledMiniSidebar className="mini-sidebar">
       <h1 className="visually-hidden">간편메뉴</h1>
 
       <MenuList
