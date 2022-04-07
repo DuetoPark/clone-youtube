@@ -12,7 +12,6 @@ import VideoViewPage from './pages/VideoView';
 const RouteWrapper = (props) => {
   const [videos, setVideos] = useState([]);
   const [currentVideoId, setCurrentVideoId] = useState('');
-  const [currentActiveMenu, setCurrentActiveMenu] = useState('');
   const [menu, setMenu] = useState({
     gnb: [
       { id: 1, category: 'upload', active: false },
@@ -203,35 +202,8 @@ const RouteWrapper = (props) => {
     //   .catch((error) => console.log('error', error));
   };
 
-  const toggleButton = useCallback(
-    (event) => {
-      let lastMenu;
-
-      if (currentActiveMenu) {
-        lastMenu = currentActiveMenu;
-        currentActiveMenu.classList.remove('is-active');
-      } else {
-        lastMenu = document.querySelector('.main-menu-item.is-active');
-      }
-
-      const target = event.target;
-      let currentMenu;
-
-      if (target.matches('.gnb-icon-button')) {
-        currentMenu = event.target;
-      } else {
-        currentMenu = event.target.parentElement;
-      }
-
-      lastMenu.classList.remove('is-active');
-      currentMenu.classList.add('is-active');
-      setCurrentActiveMenu(currentMenu);
-    },
-    [currentActiveMenu]
-  );
-
   const changeMenuState = useCallback(
-    (callbackFunc, event) => {
+    (event) => {
       const target = event.target;
       const { category, menu } = target.dataset || false;
 
@@ -250,8 +222,6 @@ const RouteWrapper = (props) => {
 
         return newState;
       });
-
-      callbackFunc && callbackFunc();
     },
     [setMenu]
   );
@@ -268,7 +238,6 @@ const RouteWrapper = (props) => {
         onHome={getPopularVideos}
         onSearch={getSearchResult}
         onButton={changeMenuState}
-        callBackFunc={toggleButton}
       />
 
       <Routes>
@@ -281,7 +250,6 @@ const RouteWrapper = (props) => {
         menu={menu}
         onHome={getPopularVideos}
         onMenu={changeMenuState}
-        callBackFunc={toggleButton}
       />
 
       <div>

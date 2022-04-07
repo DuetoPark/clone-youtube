@@ -7,6 +7,7 @@ export const StyledMenuList = styled.ul`
   ${textStyle('md')};
   width: 100%;
   color: ${({ theme }) => theme.colors.primary};
+  user-select: none;
 
   li {
     width: 100%;

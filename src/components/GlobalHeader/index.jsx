@@ -52,15 +52,6 @@ const GlobalHeader = (props) => {
     }
   }, []);
 
-  const handleGnbButton = useCallback(
-    (event) => {
-      const changeMenuState = props.onButton;
-      const toggleButton = props.callBackFunc;
-      changeMenuState(toggleButton.bind(null, event), event);
-    },
-    [props]
-  );
-
   const getMenuState = useCallback(
     (category) => {
       const menuData = props.menuItems.filter(
@@ -84,6 +75,7 @@ const GlobalHeader = (props) => {
         {!isMobile && (
           <StyledGnbIconButton
             className="gnb-icon-button is-menu"
+            onClick={props.onSidebar}
             aria-label="메뉴 열기"
             type="button"
           >
@@ -124,7 +116,7 @@ const GlobalHeader = (props) => {
         {/* NOTE: 로그인을 한 경우 */}
         {/* <div
             className="button-group"
-            onClick={handleGnbButton};
+            onClick={props.onButton};
             }}
           >
           {!isMobile && (
@@ -173,7 +165,7 @@ const GlobalHeader = (props) => {
         )}
 
         {!isMobile && (
-          <div className="button-group" onClick={handleGnbButton}>
+          <div className="button-group" onClick={props.onButton}>
             <StyledGnbIconButton
               className="gnb-icon-button is-app"
               aria-label="유튜브 앱 메뉴 열기"
