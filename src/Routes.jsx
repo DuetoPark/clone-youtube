@@ -19,17 +19,15 @@ const RouteWrapper = (props) => {
       { id: 3, category: 'alert', active: false },
     ],
     main: [
-      { id: 1, category: '홈', active: true },
+      { id: 1, category: '홈', active: false },
       { id: 2, category: '탐색', active: false },
       { id: 3, category: 'Shorts', active: false },
       { id: 4, category: '구독', active: false },
-    ],
-    history: [
-      { id: 1, category: '보관함', active: false },
-      { id: 2, category: '시청 기록', active: false },
-      { id: 3, category: '내 동영상', active: false },
-      { id: 4, category: '나중에 볼 동영상', active: false },
-      { id: 5, category: '좋아요 표시한 동영상', active: false },
+      { id: 5, category: '보관함', active: false },
+      { id: 6, category: '시청 기록', active: false },
+      { id: 7, category: '내 동영상', active: false },
+      { id: 8, category: '나중에 볼 동영상', active: false },
+      { id: 9, category: '좋아요 표시한 동영상', active: false },
     ],
     popular: [
       { id: 1, category: '음악', active: false },

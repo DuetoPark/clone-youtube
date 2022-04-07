@@ -52,8 +52,8 @@ const Sidebar = (props) => {
             />
 
             <MenuList
-              menuType="history"
-              menuItems={props.menu.history}
+              menuType="main"
+              menuItems={props.menu.main}
               onMenu={props.onMenu}
             />
           </div>
