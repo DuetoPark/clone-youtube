@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Routes, Route } from 'react-router';
 
 import GlobalHeader from './components/GlobalHeader';
@@ -63,6 +63,7 @@ const RouteWrapper = (props) => {
   });
 
   const inputRef = React.createRef();
+  const sidebarRef = useRef();
 
   const getPopularVideos = useCallback(async () => {
     const requestOptions = {
@@ -229,6 +230,9 @@ const RouteWrapper = (props) => {
   useEffect(() => {
     getPopularVideos();
   }, [getPopularVideos]);
+  const activeSidebar = useCallback(() => {
+    sidebarRef.current.classList.add('is-active');
+  }, [sidebarRef]);
 
   return (
     <React.Fragment>
@@ -238,6 +242,7 @@ const RouteWrapper = (props) => {
         onHome={getPopularVideos}
         onSearch={getSearchResult}
         onButton={changeMenuState}
+        onSidebar={activeSidebar}
       />
 
       <Routes>

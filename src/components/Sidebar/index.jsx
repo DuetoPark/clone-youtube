@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import MenuList from '../MenuList';
@@ -9,14 +9,21 @@ import { Logo, MenuIcon, AuthIcon } from '../../assets';
 import { StyledSidebar, StyledSidebarNav } from './styles';
 
 const Sidebar = (props) => {
+  const removeSidebar = useCallback((event) => {
+    const target = event.target;
+    const sidebar = target.parentElement.parentElement;
+
+    sidebar.classList.remove('is-active');
+  }, []);
 
   return (
-    <StyledSidebar className="sidebar is-active">
+    <StyledSidebar ref={props.sidebarRef} className="sidebar">
       <header className="sidebar-header">
         <h1 className="visually-hidden">사이드바</h1>
 
         <StyledGnbIconButton
           className="close-button"
+          onClick={removeSidebar}
           aria-label="사이드바 닫기"
           type="button"
         >
