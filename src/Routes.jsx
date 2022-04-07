@@ -295,6 +295,7 @@ const RouteWrapper = (props) => {
       </main>
 
       <Sidebar
+        sidebarRef={sidebarRef}
         menu={menu}
         onHome={getPopularVideos}
         onMenu={changeMenuState}

@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import MenuList from '../MenuList';
-import { StyledGnbIconButton } from '../GlobalHeader/styles';
 import GlobalFooter from '../GlobalFooter';
 import { Logo, MenuIcon, AuthIcon } from '../../assets';
 
+import { StyledGnbIconButton } from '../GlobalHeader/styles';
 import { StyledSidebar, StyledSidebarNav } from './styles';
 
 const Sidebar = (props) => {
