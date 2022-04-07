@@ -236,15 +236,16 @@ const RouteWrapper = (props) => {
 
       if (!category || !menu) return;
 
-      setMenu((state) => {
-        const newMenu = state[menu].map((item) => {
+      setMenu((prevState) => {
+        const newState = { ...prevState };
+
+        const newMenu = prevState[menu].map((item) => {
           if (item.category === category) {
             return { ...item, active: !item.active };
           }
           return { ...item, active: item.active && false };
         });
 
-        const newState = { ...state };
         newState[menu] = newMenu;
 
         return newState;

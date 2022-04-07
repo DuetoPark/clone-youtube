@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Thumbnail from '../Thumbnail';
 import VideoInfo from './VideoInfo';
+
 import { StyledVideoCard } from './styles';
 
 const VideoItem = (props) => (
