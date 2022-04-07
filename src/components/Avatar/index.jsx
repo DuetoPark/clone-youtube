@@ -1,5 +1,7 @@
-import { StyledAvatar } from './styles';
+import React from 'react';
+
 import { Link } from 'react-router-dom';
+import { StyledAvatar } from './styles';
 
 const Avatar = ({ video, size, address, className }) => {
   if (address) {
