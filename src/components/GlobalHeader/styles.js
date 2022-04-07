@@ -1,17 +1,18 @@
 import styled from 'styled-components';
+
+import {
+  GNB_HEIGHT_MOBILE,
+  GNB_HEIGHT_TABLET,
+  GNB_ICON_SIZE_TABLET,
+  SEARCH_BUTTON_WIDTH,
+  DELETE_BUTTON_MARGIN,
+} from '../';
+
 import { flexbox, media, positionCenterY, textStyle } from '../../styles/utils';
-
-const GNB_HEIGHT_MOBILE = 48;
-const GNB_HEIGHT_TABLET = 56;
-
-const GNB_ICON_SIZE_TABLET = 40;
-
-const SEARCH_BUTTON_WIDTH = 64;
-const DELETE_BUTTON_MARGIN = 6;
 
 export const StyledGlobalHeader = styled.header`
   ${flexbox('between')}
-  height: ${GNB_HEIGHT_MOBILE}px;
+  height: ${GNB_HEIGHT_MOBILE};
   box-shadow: 0 4px 2px -2px rgb(0 0 0 / 20%);
   background-color: ${({ theme }) => theme.colors.white};
 
@@ -23,7 +24,7 @@ export const StyledGlobalHeader = styled.header`
 
     .logo a {
       ${flexbox()};
-      height: ${GNB_HEIGHT_MOBILE}px;
+      height: ${GNB_HEIGHT_MOBILE};
       padding: 0 12px;
     }
   }
@@ -34,8 +35,8 @@ export const StyledGlobalHeader = styled.header`
     flex-shrink: 0;
 
     .auth-button {
-      width: ${GNB_HEIGHT_MOBILE}px;
-      height: ${GNB_HEIGHT_MOBILE}px;
+      width: ${GNB_HEIGHT_MOBILE};
+      height: ${GNB_HEIGHT_MOBILE};
       transition: background-color 200ms ease-in-out;
 
       &:active {
@@ -58,15 +59,13 @@ export const StyledGlobalHeader = styled.header`
 
   ${media.greaterThan('tablet')`
     position: relative;
-    height: ${GNB_HEIGHT_TABLET}px;
+    height: ${GNB_HEIGHT_TABLET};
     padding: 0 16px;
     box-shadow: none;
-    border-bottom: 1px solid ${({ theme }) =>
-      theme.colors.borderGeneral}; // 지울 것
 
     .gnb-left {  
       .logo a {
-          height: ${GNB_HEIGHT_TABLET}px;
+          height: ${GNB_HEIGHT_TABLET};
           padding-right: 14px;
           padding-left: 8px;
           margin-left: 8px;
@@ -197,7 +196,7 @@ export const StyledGnbSearch = styled.form`
       flex-shrink: 1;
       height: 40px;
       padding-left: 6px;
-      padding-right: ${GNB_ICON_SIZE_TABLET}px;
+      padding-right: ${GNB_ICON_SIZE_TABLET};
       color: ${({ theme }) => theme.colors.primary};
       border-radius: 2px 0 0 2px;
       transition: border-color 200ms ease-in-out,
@@ -228,7 +227,7 @@ export const StyledGnbSearch = styled.form`
 
     .delete-button {
       ${positionCenterY()};
-      right: ${SEARCH_BUTTON_WIDTH + DELETE_BUTTON_MARGIN}px;
+      right: calc(${SEARCH_BUTTON_WIDTH} + ${DELETE_BUTTON_MARGIN});
       width: 28px;
       height: 28px;
       border: 0;
