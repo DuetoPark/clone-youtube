@@ -44,7 +44,8 @@ const colors = {
 };
 
 const levels = {
-  sidebar: 10,
+  sidebar: 100,
+  overlay: 10,
 };
 
 export const gutter = '10px';
