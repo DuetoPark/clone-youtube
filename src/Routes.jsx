@@ -201,6 +201,10 @@ const RouteWrapper = (props) => {
     //   .catch((error) => console.log('error', error));
   };
 
+  useEffect(() => {
+    getPopularVideos();
+  }, [getPopularVideos]);
+
   useEffect(function changePageTitle() {
     const pathname = window.location.pathname;
     const titlePrefix = 'Youtube - ';
@@ -242,9 +246,28 @@ const RouteWrapper = (props) => {
     [setMenu]
   );
 
+  const toggleHomeButton = useCallback(() => {
+    const pathname = window.location.pathname;
+
+    setMenu((prevState) => {
+      const newState = { ...prevState };
+      const newMain = prevState.main.map((item) => {
+        if (item.category === '홈') {
+          return { ...item, active: pathname === '/' ? true : false };
+        } else {
+          return item;
+        }
+      });
+
+      newState.main = newMain;
+
+      return newState;
+    });
+  }, [setMenu]);
+
   useEffect(() => {
-    getPopularVideos();
-  }, [getPopularVideos]);
+    toggleHomeButton();
+  }, [toggleHomeButton]);
   const activeSidebar = useCallback(() => {
     sidebarRef.current.classList.add('is-active');
   }, [sidebarRef]);
