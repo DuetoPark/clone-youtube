@@ -45,6 +45,7 @@ const colors = {
 
 const levels = {
   sidebar: 100,
+  miniSidebar: 20,
   overlay: 10,
 };
 
