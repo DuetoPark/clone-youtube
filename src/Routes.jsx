@@ -64,6 +64,9 @@ const RouteWrapper = (props) => {
   const inputRef = React.createRef();
   const sidebarRef = useRef();
 
+  // ------------------
+  // NOTE: Page Control
+  // ------------------
   const getPopularVideos = useCallback(async () => {
     const requestOptions = {
       method: 'GET',
@@ -223,6 +226,9 @@ const RouteWrapper = (props) => {
     }
   });
 
+  // ------------------
+  // NOTE: Menu Control
+  // ------------------
   const changeMenuState = useCallback(
     (event) => {
       const target = event.target;
@@ -269,6 +275,10 @@ const RouteWrapper = (props) => {
   useEffect(() => {
     toggleHomeButton();
   }, [toggleHomeButton]);
+
+  // ------------------
+  // NOTE: Modal Control
+  // ------------------
   const activeSidebar = useCallback(() => {
     sidebarRef.current.classList.add('is-active');
   }, [sidebarRef]);
