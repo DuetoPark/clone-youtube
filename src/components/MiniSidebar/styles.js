@@ -4,7 +4,7 @@ import { GNB_HEIGHT_TABLET, MINISIDEBAR_WIDTH_TABLET } from '../';
 
 import { textStyle, media, flexbox } from '../../styles/utils';
 
-export const StyledMiniSidebar = styled.aside`
+export const StyledMiniSidebar = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
