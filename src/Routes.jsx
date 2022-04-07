@@ -201,6 +201,23 @@ const RouteWrapper = (props) => {
     //   .catch((error) => console.log('error', error));
   };
 
+  useEffect(function changePageTitle() {
+    const pathname = window.location.pathname;
+    const titlePrefix = 'Youtube - ';
+
+    switch (pathname) {
+      case '/search':
+        document.title = `${titlePrefix}Search`;
+        break;
+      case '/video':
+        document.title = `${titlePrefix}Player`;
+        break;
+      default:
+        document.title = `${titlePrefix}Home`;
+        break;
+    }
+  });
+
   const changeMenuState = useCallback(
     (event) => {
       const target = event.target;
