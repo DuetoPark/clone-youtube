@@ -49,14 +49,12 @@ const Sidebar = (props) => {
               menuType="main"
               menuItems={props.menu.main}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
 
             <MenuList
               menuType="history"
               menuItems={props.menu.history}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
           </div>
 
@@ -80,7 +78,6 @@ const Sidebar = (props) => {
               menuType="popular"
               menuItems={props.menu.popular}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
           </div>
 
@@ -89,7 +86,6 @@ const Sidebar = (props) => {
               menuType="find"
               menuItems={props.menu.find}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
           </div>
 
@@ -100,7 +96,6 @@ const Sidebar = (props) => {
               menuType="moreNotUser"
               menuItems={props.menu.moreNotUser}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
           </div>
 
@@ -112,7 +107,6 @@ const Sidebar = (props) => {
               menuType="moreUser"
               menuItems={props.menu.moreUser}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
           </div> */}
 
@@ -121,7 +115,6 @@ const Sidebar = (props) => {
               menuType="service"
               menuItems={props.menu.service}
               onMenu={props.onMenu}
-              callBackFunc={props.callBackFunc}
             />
           </div>
         </StyledSidebarNav>
