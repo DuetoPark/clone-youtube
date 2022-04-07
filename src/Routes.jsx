@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router';
 import GlobalHeader from './components/GlobalHeader';
 import VideoList from './components/VideoList';
 import Sidebar from './components/Sidebar';
+import MiniSidebar from './components/MiniSidebar';
 
 import VideoRecommendationPage from './pages/VideoRecommendation';
 import SearchResultPage from './pages/SearchResult';
@@ -283,11 +284,15 @@ const RouteWrapper = (props) => {
         onSidebar={activeSidebar}
       />
 
-      <Routes>
-        <Route path="/" element={<VideoRecommendationPage />}></Route>
-        <Route path="/search" element={<SearchResultPage />}></Route>
-        <Route path="/video" element={<VideoViewPage />}></Route>
-      </Routes>
+      <main>
+        <MiniSidebar menu={menu} onMenu={changeMenuState} />
+
+        <Routes>
+          <Route path="/" element={<VideoRecommendationPage />}></Route>
+          <Route path="/search" element={<SearchResultPage />}></Route>
+          <Route path="/video" element={<VideoViewPage />}></Route>
+        </Routes>
+      </main>
 
       <Sidebar
         menu={menu}
