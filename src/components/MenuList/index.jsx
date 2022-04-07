@@ -16,7 +16,7 @@ const MenuList = memo((props) => {
         return (
           <MenuItem
             key={id}
-            className={`${active && 'is-active'}`}
+            className={`${active ? 'is-active' : ''}`}
             menuType={props.menuType}
             category={category}
             active={active}
