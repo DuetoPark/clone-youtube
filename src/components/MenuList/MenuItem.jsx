@@ -145,7 +145,7 @@ function getIcon(category, active) {
 
 const MenuItem = memo((props) => {
   return (
-    <li>
+    <li className={`${props.menuType}-menu-item ${props.className}`}>
       <StyledMenu
         className={`menu`}
         to="/"
