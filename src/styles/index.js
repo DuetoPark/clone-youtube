@@ -17,6 +17,7 @@ const fontSizes = {
   base: `${13 / 16}rem`,
   md: `${14 / 16}rem`,
   lg: `${16 / 16}rem`,
+  xl: `${18 / 16}rem`,
 };
 
 const lineHeights = {
@@ -25,6 +26,7 @@ const lineHeights = {
   base: `${18 / 16}rem`,
   md: `${20 / 16}rem`,
   lg: `${22 / 16}rem`,
+  xl: `${26 / 16}rem`,
 };
 
 const colors = {
