@@ -7,3 +7,4 @@ export const SEARCH_BUTTON_WIDTH = '64px';
 export const DELETE_BUTTON_MARGIN = '6px';
 
 export const MINISIDEBAR_WIDTH_TABLET = '72px';
+export const MINISIDEBAR_HEIGHT_MOBILE = '48px';

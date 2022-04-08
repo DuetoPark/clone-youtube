@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-import { GNB_HEIGHT_TABLET, MINISIDEBAR_WIDTH_TABLET } from '../';
+import {
+  GNB_HEIGHT_TABLET,
+  MINISIDEBAR_WIDTH_TABLET,
+  MINISIDEBAR_HEIGHT_MOBILE,
+} from '../';
 
 import { textStyle, media, flexbox } from '../../styles/utils';
 
@@ -10,6 +14,7 @@ export const StyledMiniSidebar = styled.nav`
   left: 0;
   z-index: ${({ theme }) => theme.levels.miniSidebar};
   width: 100%;
+  height: calc(${MINISIDEBAR_HEIGHT_MOBILE} + 1px);
   background-color: ${({ theme }) => theme.colors.white};
   border-top: 1px solid ${({ theme }) => theme.colors.borderGeneral};
 
