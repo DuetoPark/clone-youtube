@@ -90,6 +90,7 @@ const GlobalHeader = (props) => {
           <GnbSearch
             className="search-form"
             onSearch={props.onSearch}
+            onInput={props.onInput}
             inputRef={props.inputRef}
           >
             <StyledGnbIconButton

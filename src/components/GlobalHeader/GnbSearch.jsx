@@ -22,6 +22,7 @@ const GnbSearch = (props) => {
 
         <StyledGnbIconButton
           className="gnb-icon-button delete-button"
+          onClick={props.onInput}
           aria-label="검색어 삭제"
           type="button"
         >

@@ -65,6 +65,14 @@ const RouteWrapper = (props) => {
   const sidebarCloseBtnRef = useRef();
 
   // ------------------
+  // NOTE: Input Control
+  // ------------------
+  const removeInputText = useCallback(() => {
+    inputRef.current.value = '';
+    inputRef.current.focus();
+  }, [inputRef]);
+
+  // ------------------
   // NOTE: Page Control
   // ------------------
   const getPopularVideos = useCallback(async () => {
@@ -302,6 +310,7 @@ const RouteWrapper = (props) => {
         onSearch={getSearchResult}
         onButton={changeMenuState}
         onSidebar={activeSidebar}
+        onInput={removeInputText}
       />
 
       <Routes>
