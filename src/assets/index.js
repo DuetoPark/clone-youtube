@@ -22,6 +22,8 @@ export { ReactComponent as CloseIcon } from './icons/close.svg';
 export { ReactComponent as DataIcon } from './icons/data.svg';
 export { ReactComponent as DislikeIcon } from './icons/dislike.svg';
 export { ReactComponent as DollarIcon } from './icons/dollar.svg';
+export { ReactComponent as FilterIcon } from './icons/filter.svg';
+export { ReactComponent as FilterFilledIcon } from './icons/filter-filled.svg';
 export { ReactComponent as FollowIcon } from './icons/follow.svg';
 export { ReactComponent as FollowFilledIcon } from './icons/follow-filled.svg';
 export { ReactComponent as GameIcon } from './icons/game.svg';
