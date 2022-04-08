@@ -9,21 +9,15 @@ import { StyledGnbIconButton } from '../GlobalHeader/styles';
 import { StyledSidebar, StyledSidebarNav } from './styles';
 
 const Sidebar = (props) => {
-  const removeSidebar = useCallback((event) => {
-    const target = event.target;
-    const sidebar = target.parentElement.parentElement;
-
-    sidebar.classList.remove('is-active');
-  }, []);
-
   return (
     <StyledSidebar ref={props.sidebarRef} className="sidebar">
       <header className="sidebar-header">
         <h1 className="visually-hidden">사이드바</h1>
 
         <StyledGnbIconButton
+          ref={props.sidebarCloseBtnRef}
           className="close-button"
-          onClick={removeSidebar}
+          onClick={props.onSidebar}
           aria-label="사이드바 닫기"
           type="button"
         >

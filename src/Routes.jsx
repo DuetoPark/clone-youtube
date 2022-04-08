@@ -61,6 +61,8 @@ const RouteWrapper = (props) => {
 
   const inputRef = useRef();
   const sidebarRef = useRef();
+  const sidebarTriggerRef = useRef();
+  const sidebarCloseBtnRef = useRef();
 
   // ------------------
   // NOTE: Page Control
@@ -282,12 +284,19 @@ const RouteWrapper = (props) => {
   // ------------------
   const activeSidebar = useCallback(() => {
     sidebarRef.current.classList.add('is-active');
+    sidebarCloseBtnRef.current.focus();
   }, [sidebarRef]);
+
+  const removeSidebar = useCallback(() => {
+    sidebarRef.current.classList.remove('is-active');
+    sidebarTriggerRef.current.focus();
+  }, [sidebarRef, sidebarTriggerRef]);
 
   return (
     <React.Fragment>
       <GlobalHeader
         inputRef={inputRef}
+        sidebarTriggerRef={sidebarTriggerRef}
         menuItems={menu.gnb}
         onHome={getPopularVideos}
         onSearch={getSearchResult}
@@ -324,9 +333,11 @@ const RouteWrapper = (props) => {
 
       <Sidebar
         sidebarRef={sidebarRef}
+        sidebarCloseBtnRef={sidebarCloseBtnRef}
         menu={menu}
         onHome={getPopularVideos}
         onMenu={changeMenuState}
+        onSidebar={removeSidebar}
       />
     </React.Fragment>
   );

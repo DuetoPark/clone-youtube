@@ -74,6 +74,7 @@ const GlobalHeader = (props) => {
 
         {!isMobile && (
           <StyledGnbIconButton
+            ref={props.sidebarTriggerRef}
             className="gnb-icon-button is-menu"
             onClick={props.onSidebar}
             aria-label="메뉴 열기"
