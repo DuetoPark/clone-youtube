@@ -59,7 +59,7 @@ const RouteWrapper = (props) => {
     ],
   });
 
-  const inputRef = React.createRef();
+  const inputRef = useRef();
   const sidebarRef = useRef();
 
   // ------------------
@@ -182,6 +182,8 @@ const RouteWrapper = (props) => {
 
           setVideos(videos);
         });
+
+      inputRef.current.blur();
     },
     [inputRef]
   );
