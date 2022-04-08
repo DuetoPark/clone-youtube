@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useResponsive } from '../../hooks';
+import { useResponsive, usePathname } from '../../hooks';
 import Avatar from '../Avatar';
 
 import { StyledVideoInfo } from './styles';
@@ -52,39 +53,70 @@ const VideoInfo = (props) => {
   );
 
   const { isMobile } = useResponsive();
+  const { PN, isHome, isSearch } = usePathname();
 
   return (
-    <StyledVideoInfo className="video-info">
-      <div className="info-left">
-        <Avatar
-          video={props.video}
-          size={isMobile ? 'lg' : 'md'}
-          address="./index.html"
-        />
-      </div>
+    <StyledVideoInfo className="video-info" pathName={PN}>
+      {isHome && (
+        <React.Fragment>
+          <div className="info-left">
+            <Avatar
+              video={props.video}
+              size={isMobile ? 'lg' : 'md'}
+              address="./index.html"
+            />
+          </div>
 
-      <a
-        href="./index.html"
-        className="info-right"
-        onClick={getVideoComments}
-        data-mode="video"
-      >
-        <h1 className="title" title={props.video.snippet.title}>
-          {props.video.snippet.title}
-        </h1>
+          <Link to="/video" className="info-right" onClick={getVideoComments}>
+            <h1 className="title" title={props.video.snippet.title}>
+              {props.video.snippet.title}
+            </h1>
 
-        <div className="detail">
-          <strong className="channel-name">
-            {props.video.snippet.channelTitle}
-          </strong>
-          <span className="view-count">
-            조회수 <strong>{returnViewCount()}</strong>회
-          </span>
-          <span className="published">
-            <span>{calcPublishedDate()}</span>전
-          </span>
-        </div>
-      </a>
+            <div className="detail">
+              <strong className="channel-name">
+                {props.video.snippet.channelTitle}
+              </strong>
+              <span className="view-count">
+                조회수 <strong>{returnViewCount()}</strong>회
+              </span>
+              <span className="published">
+                <span>{calcPublishedDate()}</span>전
+              </span>
+            </div>
+          </Link>
+        </React.Fragment>
+      )}
+
+      {isSearch && (
+        <React.Fragment>
+          <Link to="/video" className="info-top" onClick={getVideoComments}>
+            <h1 className="title" title={props.video.snippet.title}>
+              {props.video.snippet.title}
+            </h1>
+
+            <div className="detail">
+              <span className="view-count">
+                조회수 <strong>{returnViewCount()}</strong>회
+              </span>
+              <span className="published">
+                <span>{calcPublishedDate()}</span>전
+              </span>
+            </div>
+          </Link>
+
+          <div className="info-bottom">
+            <div className="channel">
+              <Avatar video={props.video} address="/video" />
+
+              <strong className="channel-name">
+                {props.video.snippet.channelTitle}
+              </strong>
+            </div>
+
+            <p className="desc">{props.video.snippet.description}</p>
+          </div>
+        </React.Fragment>
+      )}
     </StyledVideoInfo>
   );
 };
