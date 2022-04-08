@@ -12,9 +12,14 @@ import { flexbox, media, positionCenterY, textStyle } from '../../styles/utils';
 
 export const StyledGlobalHeader = styled.header`
   ${flexbox('between')}
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: ${({ theme }) => theme.levels.globalHeader};
   height: ${GNB_HEIGHT_MOBILE};
   box-shadow: 0 4px 2px -2px rgb(0 0 0 / 20%);
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(2px) saturate(150%);
 
   .gnb-left {
     ${flexbox('start')}
@@ -58,7 +63,6 @@ export const StyledGlobalHeader = styled.header`
   }
 
   ${media.greaterThan('tablet')`
-    position: relative;
     height: ${GNB_HEIGHT_TABLET};
     padding: 0 16px;
     box-shadow: none;
