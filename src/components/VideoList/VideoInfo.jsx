@@ -6,28 +6,42 @@ import Avatar from '../Avatar';
 import { StyledVideoInfo } from './styles';
 
 const VideoInfo = (props) => {
-  function calcPublishedDate() {
+  const calcPublishedDate = useCallback(() => {
     const publishedDate = props.video.snippet.publishedAt.split('T')[0];
     const [year, month, date] = publishedDate.split('-');
 
     const now = new Date();
     const yearAmount = now.getFullYear() - year;
     const monthAmount = now.getMonth() - month;
+    const dateAmount = now.getDate() - date;
 
     if (yearAmount > 0) {
       return `${yearAmount}년 `;
     } else if (monthAmount > 0) {
       return `${monthAmount}달 `;
+    } else if (dateAmount > 0) {
+      return `${dateAmount}일 `;
     } else {
-      return `${now.getDate() - date}일 `;
+      return;
     }
-  }
+  }, [props]);
 
-  function returnViewCount() {
-    const viewCount = props.video.statistics.viewCount;
+  const returnViewCount = useCallback(() => {
+    const { viewCount } = props.video.statistics;
 
-    return Number(viewCount).toLocaleString();
-  }
+    if (viewCount > 100000) {
+      const divided = Math.floor(viewCount / 10000);
+      return `${divided.toLocaleString()}만`;
+    } else if (viewCount >= 10000) {
+      const divided = (viewCount / 10000).toFixed(1);
+      return `${divided.toLocaleString()}만`;
+    } else if (viewCount >= 1000) {
+      const divided = (viewCount / 1000).toFixed(1);
+      return `${divided.toLocaleString()}천`;
+    } else {
+      return Number(viewCount).toLocaleString();
+    }
+  }, [props]);
 
   const getVideoComments = useCallback(
     (event) => {
