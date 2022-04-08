@@ -43,8 +43,8 @@ export const StyledMiniSidebar = styled.nav`
 
   ${media.greaterThan('tablet')`
     width: ${MINISIDEBAR_WIDTH_TABLET};
-    height: calc(100vh - ${GNB_HEIGHT_TABLET});
-    padding-top: 4px;
+    height: 100vh;
+    padding-top: calc(${GNB_HEIGHT_TABLET} + 4px);
     border-top: 0;
 
 
