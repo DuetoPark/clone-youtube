@@ -1,6 +1,7 @@
 import 'styled-components';
 
 const breakpoints = {
+  mobile: '568px',
   tablet: '768px',
   desktop: '1200px',
 };
@@ -45,6 +46,8 @@ const colors = {
 
 const levels = {
   sidebar: 100,
+  globalHeader: 40,
+  tabList: 30,
   miniSidebar: 20,
   overlay: 10,
 };

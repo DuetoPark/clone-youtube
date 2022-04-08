@@ -6,7 +6,7 @@ import VideoInfo from './VideoInfo';
 import { StyledVideoCard } from './styles';
 
 const VideoItem = (props) => (
-  <li>
+  <li className="video-item">
     <StyledVideoCard className="video-card">
       <Thumbnail onPage={props.onPage} video={props.video} />
       <VideoInfo onPage={props.onPage} video={props.video} />

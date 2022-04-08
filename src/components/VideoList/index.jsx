@@ -3,11 +3,11 @@ import VideoItem from './VideoItem';
 
 const VideoList = (props) => {
   return (
-    <ul>
+    <ol className="video-list">
       {props.videos.map((video) => {
         return <VideoItem key={video.id} onPage={props.onPage} video={video} />;
       })}
-    </ul>
+    </ol>
   );
 };
 
