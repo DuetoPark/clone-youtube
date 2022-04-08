@@ -67,6 +67,7 @@ export const StyledFilter = styled.div`
     }
 
     .filter-content {
+      box-sizing: content-box;
       max-height: ${(props) => props.maxHeight}px;
       padding-bottom: 32px;
     }
