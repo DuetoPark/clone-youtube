@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import { useResponsive, usePathname } from '../../hooks';
 import Avatar from '../Avatar';
 
-import { StyledVideoInfo } from './styles';
+import {
+  StyledVideoInfoInHome,
+  StyledVideoInfoInSearch,
+  StyledVideoInfoInPlayer,
+} from './styles';
 
 const VideoInfo = (props) => {
   const calcPublishedDate = useCallback(() => {
@@ -44,30 +48,23 @@ const VideoInfo = (props) => {
     }
   }, [props]);
 
-  const getVideoComments = useCallback(
-    (event) => {
-      const { id } = props.video;
-      props.onPage(event, id);
-    },
-    [props]
-  );
-
-  const { isMobile } = useResponsive();
-  const { PN, isHome, isSearch } = usePathname();
+  const { isMobile, isTablet } = useResponsive();
+  const { PN, isHome, isSearch, isPlayer } = usePathname();
 
   return (
-    <StyledVideoInfo className="video-info" pathName={PN}>
+    <React.Fragment>
       {isHome && (
-        <React.Fragment>
+        <StyledVideoInfoInHome className="video-info">
           <div className="info-left">
             <Avatar
+              className="avatar"
               video={props.video}
               size={isMobile ? 'lg' : 'md'}
               address="./index.html"
             />
           </div>
 
-          <Link to="/video" className="info-right" onClick={getVideoComments}>
+          <Link to="/video" className="info-right">
             <h1 className="title" title={props.video.snippet.title}>
               {props.video.snippet.title}
             </h1>
@@ -76,20 +73,22 @@ const VideoInfo = (props) => {
               <strong className="channel-name">
                 {props.video.snippet.channelTitle}
               </strong>
+
               <span className="view-count">
                 조회수 <strong>{returnViewCount()}</strong>회
               </span>
+
               <span className="published">
                 <span>{calcPublishedDate()}</span>전
               </span>
             </div>
           </Link>
-        </React.Fragment>
+        </StyledVideoInfoInHome>
       )}
 
       {isSearch && (
-        <React.Fragment>
-          <Link to="/video" className="info-top" onClick={getVideoComments}>
+        <StyledVideoInfoInSearch className="video-info">
+          <Link to="/video" className="info-top">
             <h1 className="title" title={props.video.snippet.title}>
               {props.video.snippet.title}
             </h1>
@@ -115,9 +114,44 @@ const VideoInfo = (props) => {
 
             <p className="desc">{props.video.snippet.description}</p>
           </div>
-        </React.Fragment>
+        </StyledVideoInfoInSearch>
       )}
-    </StyledVideoInfo>
+
+      {isPlayer && (
+        <StyledVideoInfoInPlayer className="video-info">
+          <div className="info-left">
+            <Avatar
+              className="avatar"
+              video={props.video}
+              address="/video"
+              size={'lg'}
+            />
+          </div>
+
+          <Link to="/video" className="info-right">
+            <h1 className="title" title={props.video.snippet.title}>
+              {props.video.snippet.title}
+            </h1>
+
+            <div className="detail">
+              <strong className="channel">
+                {props.video.snippet.channelTitle}
+              </strong>
+
+              <span className="view-count">
+                조회수 <strong>{returnViewCount()}</strong>회
+              </span>
+
+              {isTablet && (
+                <span className="published">
+                  <span>{calcPublishedDate()}</span>전
+                </span>
+              )}
+            </div>
+          </Link>
+        </StyledVideoInfoInPlayer>
+      )}
+    </React.Fragment>
   );
 };
 

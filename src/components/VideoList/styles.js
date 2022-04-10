@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { flexbox, textStyle, lineClamp, media } from '../../styles/utils';
 
@@ -6,17 +6,6 @@ export const StyledVideoCard = styled.article`
   margin-left: 8px;
   margin-bottom: 40px;
   margin-right: 8px;
-`;
-
-function homeVideoInfo() {
-  return css`
-    ${flexbox('start', 'start')}
-    padding-top: 12px;
-  `;
-}
-
-export const StyledVideoInfo = styled.div`
-  ${(props) => (props.pathName === '/' ? homeVideoInfo() : '')}
 
   &:active,
   &:hover {
@@ -45,6 +34,17 @@ export const StyledVideoInfo = styled.div`
     }
   }
 
+  ${media.greaterThan('mobile')`
+    .title {
+      ${lineClamp(2)}
+    }
+  `}
+`;
+
+export const StyledVideoInfoInHome = styled.div`
+  ${flexbox('start', 'start')};
+  padding-top: 12px;
+
   .info-left {
     margin-right: 12px;
   }
@@ -54,56 +54,76 @@ export const StyledVideoInfo = styled.div`
     padding-right: 24px;
   }
 
+  ${media.greaterThan('tablet')`
+    .title {
+      margin-bottom: 6px;
+    }
+
+    .detail {
+      flex-wrap: wrap;
+    }
+
+    .channel-name {
+      width: 100%;
+
+      &::after {
+        content: '';
+      }
+    }
+  `}
+`;
+
+export const StyledVideoInfoInSearch = styled.div`
   .info-bottom {
     ${textStyle('sm')};
     color: ${({ theme }) => theme.colors.secondary};
+  }
 
-    .channel {
-      ${flexbox('start')};
-      padding: 12px 0;
+  .channel {
+    ${flexbox('start')};
+    padding: 12px 0;
 
-      a {
-        flex-shrink: 0;
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-      }
-    }
-
-    .desc {
-      ${lineClamp(2)};
+    a {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
     }
   }
 
-  ${media.greaterThan('mobile')`
+  ${media.greaterThan('tablet')`
     .title {
-      ${lineClamp(2)}
+      ${textStyle('xl')};
     }
   `}
+`;
+
+export const StyledVideoInfoInPlayer = styled.div`
+  ${flexbox('start', 'start')};
+  position: relative;
+
+  .info-left {
+    margin-right: 12px;
+  }
+
+  .info-right {
+    flex-grow: 1;
+    padding-right: 40px;
+  }
+
+  .channel {
+    ${textStyle('sm')};
+    color: ${({ theme }) => theme.colors.secondary};
+  }
 
   ${media.greaterThan('tablet')`
-    .info-right {
-      .title {
-        margin-bottom: 6px;
-      }
-
-      .detail {
-        flex-wrap: wrap;
-
-        .channel-name {
-          width: 100%;
-
-          &::after {
-            content: '';
-          }
-        }
-      }
+    .detail {
+      flex-wrap: wrap;
     }
 
-    .info-top {
-      .title {
-        ${textStyle('xl')};
-      }
+    .channel {
+      display: block;
+      width: 100%;
     }
-  `}
+  `};
 `;

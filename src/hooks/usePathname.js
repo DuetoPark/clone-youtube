@@ -6,24 +6,24 @@ function getPathname() {
   let PN = pathname;
   let isHome = true;
   let isSearch = false;
-  let isVideo = false;
+  let isPlayer = false;
 
   if (pathname === '/search') {
     isHome = false;
     isSearch = true;
-    isVideo = false;
+    isPlayer = false;
   }
   if (pathname === '/video') {
     isHome = false;
     isSearch = false;
-    isVideo = true;
+    isPlayer = true;
   }
 
   return {
     PN,
     isHome,
     isSearch,
-    isVideo,
+    isPlayer,
   };
 }
 
