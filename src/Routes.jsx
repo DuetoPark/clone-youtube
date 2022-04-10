@@ -332,7 +332,11 @@ const RouteWrapper = (props) => {
             />
           }
         ></Route>
-        <Route path="/video" element={<VideoViewPage />}></Route>
+
+        <Route
+          path="/video"
+          element={<PlayerPage video={selectVideo} youtube={props.youtube} />}
+        ></Route>
       </Routes>
 
       <Sidebar
