@@ -1,8 +1,8 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 import { useResponsive } from '../../hooks';
 
-import TabItem from './TabItem';
+import TabList from '../../components/TabList';
 import { QuestIcon } from '../../assets';
 
 import { StyledTabHeader } from './styles';
@@ -27,36 +27,10 @@ const TabHeader = memo((props) => {
     { id: 14, category: '믹스', active: false },
   ]);
 
-  const [currentTab, setCurrentTab] = useState('');
-
-  const handleTab = useCallback(
-    (event) => {
-      const target = event.target;
-      const category = target.dataset.category;
-
-      if (!category || currentTab === category) return;
-
-      setTab((prevState) => {
-        const newState = prevState.map((item) => {
-          if (item.category === category) {
-            return { ...item, active: true };
-          } else {
-            return { ...item, active: !item.active ? item.active : false };
-          }
-        });
-
-        return newState;
-      });
-
-      setCurrentTab((prevState) => category);
-    },
-    [setTab, currentTab, setCurrentTab]
-  );
-
   useEffect(function activeTotalButton() {
     setTab((prevState) => {
       const newState = prevState.map((item) => {
-        if (item.category === '전체') {
+        if (item.category === '전체' || item.category === '모두') {
           return { ...item, active: true };
         } else {
           return { ...item, active: !item.active ? item.active : false };
@@ -76,11 +50,7 @@ const TabHeader = memo((props) => {
         </button>
       )}
 
-      <ol className="tab-list" onClick={handleTab} role="tablist">
-        {tab.map((item) => (
-          <TabItem key={item.id} tab={item} />
-        ))}
-      </ol>
+      <TabList tab={tab} setTab={setTab} />
     </StyledTabHeader>
   );
 });

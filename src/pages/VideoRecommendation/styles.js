@@ -6,11 +6,11 @@ import {
   MINISIDEBAR_WIDTH_TABLET,
 } from '../../components';
 
-import { media, flexbox, textStyle, noScrollbar } from '../../styles/utils';
+import { media, flexbox, noScrollbar } from '../../styles/utils';
 
 export const StyledRecommendation = styled.div`
   width: 100%;
-  background: ${({ theme }) => theme.colors.backgroundGeneral};
+  background-color: ${({ theme }) => theme.colors.backgroundGeneral};
 
   .video-list {
     ${flexbox('start', 'start')};
@@ -67,8 +67,7 @@ export const StyledTabHeader = styled.header`
   background-color: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(2px) saturate(150%);
 
-  .quest-button,
-  .tab-list {
+  .quest-button {
     ${flexbox('start')};
     white-space: nowrap;
   }
@@ -105,51 +104,5 @@ export const StyledTabHeader = styled.header`
     .tab-list {
       margin: 0 24px;
     }
-  `};
-`;
-
-export const StyledTab = styled.li`
-  flex-grow: 0;
-  flex-shrink: 0;
-  height: 32px;
-  border-radius: 100px;
-  border: 1px solid ${({ theme }) => theme.colors.borderGeneral};
-  background-color: ${({ theme }) => theme.colors.backgroundHover};
-  transition: background-color 200ms ease-in-out;
-
-  &:not(:last-child) {
-    margin-right: 12px;
-  }
-
-  &.is-active {
-    background-color: ${({ theme }) => theme.colors.secondary};
-
-    .tab-button {
-      color: ${({ theme }) => theme.colors.white};
-    }
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.colors.backgroundActive};
-  }
-
-  .tab-button {
-    ${textStyle('md')};
-    width: 100%;
-    height: 100%;
-    padding: 0 12px;
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
-  ${media.greaterThan('tablet')`
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.backgroundActive};
-  }
-
-  &.is-active {
-    background-color: ${({ theme }) => theme.colors.primary};
-
-    
-  }
   `};
 `;
