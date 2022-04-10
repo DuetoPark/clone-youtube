@@ -83,127 +83,26 @@ const RouteWrapper = (props) => {
   // ------------------
   // NOTE: Page Control
   // ------------------
-  const getPopularVideos = useCallback(async () => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-    let videoList;
-    let channelIdList;
-    let avatarImage = new Map();
-
-    await fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&part=snippet&part=statistics&part=contentDetails&maxResults=25&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        videoList = [...data.items];
-
-        channelIdList = videoList.map((item) => {
-          const { channelId } = item.snippet;
-          avatarImage.set(channelId, '');
-
-          return `id=${channelId}`;
-        });
-      });
-
-    await fetch(
-      `https://youtube.googleapis.com/youtube/v3/channels?${channelIdList.join(
-        '&'
-      )}&part=snippet&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        data.items.forEach((item) => {
-          const { id } = item;
-          const { url } = item.snippet.thumbnails.default;
-
-          avatarImage.set(id, url);
-        });
-
-        const videos = videoList.map((item) => {
-          const channelId = item.snippet.channelId;
-          const avatarURL = avatarImage.get(channelId);
-          return { ...item, avatarURL, channelId };
-        });
-
-        setVideos(videos);
-      });
-  }, []);
+  const getPopularVideos = useCallback(() => {
+    props.youtube
+      .mostPopular() //
+      .then((items) => setVideos((prev) => items));
+  }, [props, setVideos]);
 
   const getSearchResult = useCallback(
-    async (event) => {
+    (event) => {
       event.preventDefault();
 
-      const value = inputRef.current.value;
-      const requestOptions = {
-        method: 'GET',
-        redirect: 'follow',
-      };
-
-      let videoList;
-      let videoIdList;
-      let channelIdList;
-      let avatarImage = new Map();
-
-      await fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${value}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          videoIdList = data.items.map((item) => `id=${item.id.videoId}`);
-        })
-        .catch((error) => console.log('error', error));
-
-      await fetch(
-        `https://youtube.googleapis.com/youtube/v3/videos?${videoIdList.join(
-          '&'
-        )}&part=snippet&part=statistics&part=contentDetails&maxResults=25&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          videoList = [...data.items];
-
-          channelIdList = videoList.map((item) => {
-            const { channelId } = item.snippet;
-            avatarImage.set(channelId, '');
-
-            return `id=${channelId}`;
-          });
-        })
-        .catch((error) => console.log('error', error));
-
-      await fetch(
-        `https://youtube.googleapis.com/youtube/v3/channels?${channelIdList.join(
-          '&'
-        )}&part=snippet&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          data.items.forEach((item) => {
-            const { id } = item;
-            const { url } = item.snippet.thumbnails.default;
-
-            avatarImage.set(id, url);
-          });
-
-          const videos = videoList.map((item) => {
-            const channelId = item.snippet.channelId;
-            const avatarURL = avatarImage.get(channelId);
-            return { ...item, avatarURL };
-          });
-
-          setVideos(videos);
+      props.youtube
+        .search(inputRef.current.value) //
+        .then((items) => {
+          setVideos((prev) => items);
+          console.log(items);
         });
 
       inputRef.current.blur();
     },
-    [inputRef]
+    [props, inputRef]
   );
 
   const getVideoComments = (id) => {
