@@ -8,6 +8,8 @@ import VideoRecommendationPage from './pages/VideoRecommendation';
 import SearchResultPage from './pages/SearchResult';
 import VideoViewPage from './pages/VideoView';
 
+import Modal from './app/modal';
+
 const RouteWrapper = (props) => {
   const [videos, setVideos] = useState([]);
   const [currentVideoId, setCurrentVideoId] = useState('');
@@ -63,6 +65,12 @@ const RouteWrapper = (props) => {
   const sidebarRef = useRef();
   const sidebarTriggerRef = useRef();
   const sidebarCloseBtnRef = useRef();
+
+  const sidebar = new Modal(
+    sidebarRef.current,
+    sidebarTriggerRef.current,
+    sidebarCloseBtnRef.current
+  );
 
   // ------------------
   // NOTE: Input Control
@@ -287,29 +295,16 @@ const RouteWrapper = (props) => {
     toggleHomeButton();
   }, [toggleHomeButton]);
 
-  // ------------------
-  // NOTE: Modal Control
-  // ------------------
-  const activeSidebar = useCallback(() => {
-    sidebarRef.current.classList.add('is-active');
-    sidebarCloseBtnRef.current.focus();
-  }, [sidebarRef]);
-
-  const removeSidebar = useCallback(() => {
-    sidebarRef.current.classList.remove('is-active');
-    sidebarTriggerRef.current.focus();
-  }, [sidebarRef, sidebarTriggerRef]);
-
   return (
     <React.Fragment>
       <GlobalHeader
         inputRef={inputRef}
+        sidebar={sidebar}
         sidebarTriggerRef={sidebarTriggerRef}
         menuItems={menu.gnb}
         onHome={getPopularVideos}
         onSearch={getSearchResult}
         onButton={changeMenuState}
-        onSidebar={activeSidebar}
         onInput={removeInputText}
       />
 
@@ -341,12 +336,12 @@ const RouteWrapper = (props) => {
       </Routes>
 
       <Sidebar
+        sidebar={sidebar}
         sidebarRef={sidebarRef}
         sidebarCloseBtnRef={sidebarCloseBtnRef}
         menu={menu}
         onHome={getPopularVideos}
         onMenu={changeMenuState}
-        onSidebar={removeSidebar}
       />
     </React.Fragment>
   );

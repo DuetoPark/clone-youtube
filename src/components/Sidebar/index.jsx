@@ -9,6 +9,10 @@ import { StyledGnbIconButton } from '../GlobalHeader/styles';
 import { StyledSidebar, StyledSidebarNav } from './styles';
 
 const Sidebar = (props) => {
+  const closeSidebar = useCallback(() => {
+    props.sidebar.close();
+  }, [props]);
+
   return (
     <StyledSidebar ref={props.sidebarRef} className="sidebar">
       <header className="sidebar-header">
@@ -17,7 +21,7 @@ const Sidebar = (props) => {
         <StyledGnbIconButton
           ref={props.sidebarCloseBtnRef}
           className="close-button"
-          onClick={props.onSidebar}
+          onClick={closeSidebar}
           aria-label="사이드바 닫기"
           type="button"
         >

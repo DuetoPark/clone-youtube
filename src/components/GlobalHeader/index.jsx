@@ -63,6 +63,10 @@ const GlobalHeader = (props) => {
     [props]
   );
 
+  const openSidebar = useCallback(() => {
+    props.sidebar.open();
+  }, [props]);
+
   return (
     <StyledGlobalHeader className="gnb">
       <div className="gnb-left">
@@ -76,7 +80,7 @@ const GlobalHeader = (props) => {
           <StyledGnbIconButton
             ref={props.sidebarTriggerRef}
             className="gnb-icon-button is-menu"
-            onClick={props.onSidebar}
+            onClick={openSidebar}
             aria-label="메뉴 열기"
             type="button"
           >
