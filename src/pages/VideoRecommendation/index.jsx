@@ -6,13 +6,20 @@ import TabHeader from './TabHeader';
 
 import { StyledRecommendation } from './styles';
 
-const VideoRecommendationPage = ({ menu, onMenu, videos, onVideo }) => {
+const VideoRecommendationPage = ({
+  menu,
+  onMenu,
+  videos,
+  onVideo,
+  tab,
+  onTab,
+}) => {
   return (
     <main>
       <MiniSidebar className="mini-sidebar" menu={menu} onMenu={onMenu} />
 
       <StyledRecommendation className="video-recommendation">
-        <TabHeader />
+        <TabHeader tab={tab} onTab={onTab} />
         <VideoList videos={videos} onVideo={onVideo} />
       </StyledRecommendation>
     </main>

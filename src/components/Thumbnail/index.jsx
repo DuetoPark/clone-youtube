@@ -15,7 +15,7 @@ const Thumbnail = ({ video, onVideo }) => {
   return (
     <StyledThumbnail
       as={Link}
-      to="/video"
+      to="/player"
       className="thumbnail"
       onClick={changeSelectVideo}
     >

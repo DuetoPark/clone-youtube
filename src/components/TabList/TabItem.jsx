@@ -2,18 +2,11 @@ import React, { memo } from 'react';
 
 import { StyledTab } from './styles';
 
-const TabItem = memo((props) => {
+const TabItem = memo(({ className, tab }) => {
   return (
-    <StyledTab
-      className={`tab-item ${props.tab.active ? 'is-active' : ''}`}
-      role="tab"
-    >
-      <button
-        className="tab-button"
-        type="button"
-        data-category={props.tab.category}
-      >
-        {props.tab.category}
+    <StyledTab className={className}>
+      <button className="tab-button" type="button" data-category={tab.category}>
+        {tab.category}
       </button>
     </StyledTab>
   );

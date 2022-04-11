@@ -32,7 +32,7 @@ const VideoInfo = ({ video, onVideo }) => {
             />
           </div>
 
-          <Link to="/video" className="info-right" onClick={changeSelectVideo}>
+          <Link to="/player" className="info-right" onClick={changeSelectVideo}>
             <h1 className="title" title={video.snippet.title}>
               {video.snippet.title}
             </h1>
@@ -56,7 +56,7 @@ const VideoInfo = ({ video, onVideo }) => {
 
       {isSearch && (
         <StyledVideoInfoInSearch className="video-info">
-          <Link to="/video" className="info-top" onClick={changeSelectVideo}>
+          <Link to="/player" className="info-top" onClick={changeSelectVideo}>
             <h1 className="title" title={video.snippet.title}>
               {video.snippet.title}
             </h1>
@@ -73,7 +73,7 @@ const VideoInfo = ({ video, onVideo }) => {
 
           <div className="info-bottom">
             <div className="channel">
-              <Avatar video={video} address="/video" />
+              <Avatar video={video} address="/player" />
 
               <strong className="channel-name">
                 {video.snippet.channelTitle}
@@ -92,13 +92,13 @@ const VideoInfo = ({ video, onVideo }) => {
               <Avatar
                 className="avatar"
                 video={video}
-                address="/video"
+                address="/player"
                 size={'lg'}
               />
             </div>
           )}
 
-          <Link to="/video" className="info-right" onClick={changeSelectVideo}>
+          <Link to="/player" className="info-right" onClick={changeSelectVideo}>
             <h1 className="title" title={video.snippet.title}>
               {video.snippet.title}
             </h1>

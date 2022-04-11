@@ -13,7 +13,7 @@ function getPathname() {
     isSearch = true;
     isPlayer = false;
   }
-  if (pathname === '/video') {
+  if (pathname === '/player') {
     isHome = false;
     isSearch = false;
     isPlayer = true;

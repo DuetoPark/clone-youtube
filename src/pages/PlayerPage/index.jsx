@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { useResponsive } from '../../hooks';
 
@@ -8,15 +8,8 @@ import VideoList from '../../components/VideoList';
 
 import { StyledMain } from './styles';
 
-const PlayerPage = ({ selectVideo, videos, onVideo }) => {
+const PlayerPage = ({ selectVideo, videos, onVideo, tab, onTab }) => {
   const { isMobile } = useResponsive();
-
-  const [tab, setTab] = useState([
-    { id: 1, category: '모두', active: true },
-    { id: 2, category: '관련 콘텐츠', active: false },
-    { id: 3, category: '실시간', active: false },
-    { id: 4, category: '최근에 업로드된 동영상', active: false },
-  ]);
 
   return (
     <StyledMain>
@@ -26,7 +19,14 @@ const PlayerPage = ({ selectVideo, videos, onVideo }) => {
 
       <div className="secondary">
         {isMobile && <h3 className="secondary-title">다음 동영상</h3>}
-        {!isMobile && <TabList tab={tab} setTab={setTab} />}
+        {!isMobile && (
+          <TabList
+            className="tab-list"
+            role="tablist"
+            tab={tab}
+            onTab={onTab}
+          />
+        )}
 
         <VideoList videos={videos} onVideo={onVideo} />
       </div>
