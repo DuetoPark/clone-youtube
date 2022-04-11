@@ -20,7 +20,7 @@ const VideoRecommendationPage = ({
 
       <StyledRecommendation className="video-recommendation">
         <TabHeader tab={tab} onTab={onTab} />
-        <VideoList videos={videos} onVideo={onVideo} />
+        <VideoList className="video-list" videos={videos} onVideo={onVideo} />
       </StyledRecommendation>
     </main>
   );

@@ -28,7 +28,7 @@ const PlayerPage = ({ selectVideo, videos, onVideo, tab, onTab }) => {
           />
         )}
 
-        <VideoList videos={videos} onVideo={onVideo} />
+        <VideoList className="video-list" videos={videos} onVideo={onVideo} />
       </div>
     </StyledMain>
   );

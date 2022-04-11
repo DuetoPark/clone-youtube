@@ -17,7 +17,7 @@ const SearchResultPage = ({ menu, videos, onMenu, onVideo }) => {
 
       <StyledSearchResult className="search-result">
         {!isMobile && <Filter />}
-        <VideoList videos={videos} onVideo={onVideo} />
+        <VideoList className="video-list" videos={videos} onVideo={onVideo} />
       </StyledSearchResult>
     </main>
   );

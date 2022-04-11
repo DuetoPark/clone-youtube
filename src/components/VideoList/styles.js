@@ -2,43 +2,45 @@ import styled from 'styled-components';
 
 import { flexbox, textStyle, lineClamp, media } from '../../styles/utils';
 
-export const StyledVideoCard = styled.article`
-  margin-left: 8px;
-  margin-bottom: 40px;
-  margin-right: 8px;
+export const StyledVideoItem = styled.li`
+  .video-card {
+    margin-left: 8px;
+    margin-bottom: 40px;
+    margin-right: 8px;
 
-  &:active,
-  &:hover {
+    &:active,
+    &:hover {
+      .title {
+        color: ${({ theme }) => theme.colors.secondary};
+      }
+    }
+
     .title {
+      ${textStyle('md')}
+      ${lineClamp(1)}
+      width: 100%;
+      margin-bottom: 3px;
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.primary};
+      transition: color 200ms ease-in-out;
+    }
+
+    .detail {
+      ${flexbox('start', 'start')}
+      ${textStyle('sm')}
       color: ${({ theme }) => theme.colors.secondary};
+
+      *:not(:last-child)::after {
+        content: '﹒';
+      }
     }
+
+    ${media.greaterThan('mobile')`
+      .title {
+        ${lineClamp(2)}
+      }
+    `}
   }
-
-  .title {
-    ${textStyle('md')}
-    ${lineClamp(1)}
-    width: 100%;
-    margin-bottom: 3px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.primary};
-    transition: color 200ms ease-in-out;
-  }
-
-  .detail {
-    ${flexbox('start', 'start')}
-    ${textStyle('sm')}
-    color: ${({ theme }) => theme.colors.secondary};
-
-    *:not(:last-child)::after {
-      content: '﹒';
-    }
-  }
-
-  ${media.greaterThan('mobile')`
-    .title {
-      ${lineClamp(2)}
-    }
-  `}
 `;
 
 export const StyledVideoInfoInHome = styled.div`

@@ -10,7 +10,7 @@ import {
   StyledVideoInfoInPlayer,
 } from './styles';
 
-const VideoInfo = ({ video, onVideo }) => {
+const VideoInfo = ({ className, video, onVideo }) => {
   const { isMobile } = useResponsive();
   const { isHome, isSearch, isPlayer } = usePathname();
   const { printView, printDate } = usePrint();
@@ -22,7 +22,7 @@ const VideoInfo = ({ video, onVideo }) => {
   return (
     <React.Fragment>
       {isHome && (
-        <StyledVideoInfoInHome className="video-info">
+        <StyledVideoInfoInHome className={className}>
           <div className="info-left">
             <Avatar
               className="avatar"
