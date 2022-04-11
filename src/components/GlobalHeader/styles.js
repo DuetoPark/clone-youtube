@@ -60,6 +60,43 @@ export const StyledGlobalHeader = styled.header`
         opacity: 0.7;
       }
     }
+
+    .search-group {
+      ${flexbox('between')};
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: ${GNB_HEIGHT_MOBILE};
+      padding: 0 8px;
+      background-color: ${({ theme }) => theme.colors.white};
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-100%);
+      transition: all 200ms ease-in-out;
+
+      &.is-active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+      }
+
+      .close-button {
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-left: -4px;
+      }
+
+      .search-form {
+        flex-grow: 1;
+        height: 40px;
+        margin-left: 42px;
+
+        .search-button {
+          height: 100%;
+        }
+      }
+    }
   }
 
   ${media.greaterThan('tablet')`
