@@ -5,7 +5,7 @@ import { usePrint } from '../../hooks';
 
 import { StyledThumbnail } from './styles';
 
-const Thumbnail = ({ video, onVideo }) => {
+const Thumbnail = ({ className, video, onVideo }) => {
   const { printDuration } = usePrint();
 
   const changeSelectVideo = useCallback(() => {
@@ -16,7 +16,7 @@ const Thumbnail = ({ video, onVideo }) => {
     <StyledThumbnail
       as={Link}
       to="/player"
-      className="thumbnail"
+      className={className}
       onClick={changeSelectVideo}
     >
       <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />

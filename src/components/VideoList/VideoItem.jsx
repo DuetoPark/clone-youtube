@@ -8,7 +8,7 @@ import { StyledVideoCard } from './styles';
 const VideoItem = ({ video, onVideo }) => (
   <li className="video-item">
     <StyledVideoCard className="video-card">
-      <Thumbnail video={video} onVideo={onVideo} />
+      <Thumbnail className="thumbnail" video={video} onVideo={onVideo} />
       <VideoInfo video={video} onVideo={onVideo} />
     </StyledVideoCard>
   </li>
