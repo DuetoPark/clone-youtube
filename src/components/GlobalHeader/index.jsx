@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useResponsive } from '../../hooks';
 import Modal from '../../app/modal';
+import getIcon from '../../app/icon';
 
 import Avatar from '../Avatar';
 import GnbSearch from './GnbSearch';
@@ -11,16 +12,10 @@ import { StyledGnbIconButton, StyledGlobalHeader } from './styles';
 
 import {
   Logo,
-  AppIcon,
-  AppFilledIcon,
   AuthIcon,
   ArrowIcon,
-  BellIcon,
-  BellFilledIcon,
   MenuIcon,
   MoreIcon,
-  UploadIcon,
-  UploadFilledIcon,
   SearchIcon,
   VoiceIcon,
 } from '../../assets';
@@ -43,32 +38,11 @@ const GlobalHeader = ({
     },
   });
 
-  const getIcon = useCallback((category, active) => {
-    switch (category) {
-      case 'upload':
-        if (active) {
-          return <UploadFilledIcon aria-hidden="true" />;
-        }
-        return <UploadIcon aria-hidden="true" />;
-      case 'app':
-        if (active) {
-          return <AppFilledIcon aria-hidden="true" />;
-        }
-        return <AppIcon aria-hidden="true" />;
-      case 'alert':
-        if (active) {
-          return <BellFilledIcon aria-hidden="true" />;
-        }
-        return <BellIcon aria-hidden="true" />;
-      default:
-    }
-  }, []);
-
   const getMenuState = useCallback(
     (category) => {
-      const menuData = menuItems.filter((item) => item.category === category);
+      const [menuData] = menuItems.filter((item) => item.category === category);
 
-      return menuData[0].active;
+      return menuData.active;
     },
     [menuItems]
   );
