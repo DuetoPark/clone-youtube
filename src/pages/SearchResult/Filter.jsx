@@ -90,7 +90,12 @@ const Filter = (props) => {
         <h2 className="visually-hidden">필터 종류</h2>
 
         {Object.keys(filter).map((key) => (
-          <FilterWrapper key={key} id={key} filter={filter} />
+          <FilterWrapper
+            key={key}
+            className="filter-wrapper"
+            id={key}
+            filter={filter}
+          />
         ))}
       </div>
     </StyledFilter>

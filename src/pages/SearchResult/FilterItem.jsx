@@ -1,10 +1,10 @@
 import React from 'react';
 
-const FilterItem = (props) => {
+const FilterItem = ({ className, filter }) => {
   return (
-    <li className="filter-item">
+    <li className={className}>
       <button className="filter-button" type="button">
-        {props.filter.category}
+        {filter.category}
       </button>
     </li>
   );

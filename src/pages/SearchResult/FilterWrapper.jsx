@@ -19,14 +19,14 @@ function getTitle(text) {
   }
 }
 
-const FilterWrapper = (props) => {
+const FilterWrapper = ({ className, id, filter }) => {
   return (
-    <div className="filter-wrapper">
-      <h3 className="title">{getTitle(props.id)}</h3>
+    <div className={className}>
+      <h3 className="title">{getTitle(id)}</h3>
 
       <ol className="filter-list">
-        {props.filter[props.id].map((item) => (
-          <FilterItem key={item.id} filter={item} />
+        {filter[id].map((item) => (
+          <FilterItem key={item.id} className="filter-item" filter={item} />
         ))}
       </ol>
     </div>
