@@ -8,18 +8,26 @@ import { Logo, MenuIcon, AuthIcon } from '../../assets';
 import { StyledGnbIconButton } from '../GlobalHeader/styles';
 import { StyledSidebar, StyledSidebarNav } from './styles';
 
-const Sidebar = (props) => {
+const Sidebar = ({
+  className,
+  sidebar,
+  sidebarRef,
+  sidebarCloseBtnRef,
+  menu,
+  onHome,
+  onMenu,
+}) => {
   const closeSidebar = useCallback(() => {
-    props.sidebar.close();
-  }, [props]);
+    sidebar.close();
+  }, [sidebar]);
 
   return (
-    <StyledSidebar ref={props.sidebarRef} className="sidebar">
+    <StyledSidebar className={className} ref={sidebarRef}>
       <header className="sidebar-header">
         <h1 className="visually-hidden">사이드바</h1>
 
         <StyledGnbIconButton
-          ref={props.sidebarCloseBtnRef}
+          ref={sidebarCloseBtnRef}
           className="close-button"
           onClick={closeSidebar}
           aria-label="사이드바 닫기"
@@ -28,12 +36,7 @@ const Sidebar = (props) => {
           <MenuIcon aria-hidden="true" />
         </StyledGnbIconButton>
 
-        <Link
-          className="logo"
-          to="/"
-          onClick={props.onHome}
-          aria-label="유튜브 홈"
-        >
+        <Link className="logo" to="/" onClick={onHome} aria-label="유튜브 홈">
           <Logo aria-hidden="true" />
         </Link>
       </header>
@@ -46,15 +49,15 @@ const Sidebar = (props) => {
             <MenuList
               className="main-menu-list"
               menuType="main"
-              menuItems={props.menu.main}
-              onMenu={props.onMenu}
+              menuItems={menu.main}
+              onMenu={onMenu}
             />
 
             <MenuList
               className="main-menu-list"
               menuType="main"
-              menuItems={props.menu.main}
-              onMenu={props.onMenu}
+              menuItems={menu.main}
+              onMenu={onMenu}
             />
           </div>
 
@@ -77,8 +80,8 @@ const Sidebar = (props) => {
             <MenuList
               className="popular-menu-list"
               menuType="popular"
-              menuItems={props.menu.popular}
-              onMenu={props.onMenu}
+              menuItems={menu.popular}
+              onMenu={onMenu}
             />
           </div>
 
@@ -86,8 +89,8 @@ const Sidebar = (props) => {
             <MenuList
               className="find-menu-list"
               menuType="find"
-              menuItems={props.menu.find}
-              onMenu={props.onMenu}
+              menuItems={menu.find}
+              onMenu={onMenu}
             />
           </div>
 
@@ -97,8 +100,8 @@ const Sidebar = (props) => {
             <MenuList
               className="moreNotUser-menu-list"
               menuType="moreNotUser"
-              menuItems={props.menu.moreNotUser}
-              onMenu={props.onMenu}
+              menuItems={menu.moreNotUser}
+              onMenu={onMenu}
             />
           </div>
 
@@ -109,8 +112,8 @@ const Sidebar = (props) => {
             <MenuList
               className="moreUser-menu-list"
               menuType="moreUser"
-              menuItems={props.menu.moreUser}
-              onMenu={props.onMenu}
+              menuItems={menu.moreUser}
+              onMenu={onMenu}
             />
           </div> */}
 
@@ -118,8 +121,8 @@ const Sidebar = (props) => {
             <MenuList
               className="service-menu-list"
               menuType="service"
-              menuItems={props.menu.service}
-              onMenu={props.onMenu}
+              menuItems={menu.service}
+              onMenu={onMenu}
             />
           </div>
         </StyledSidebarNav>

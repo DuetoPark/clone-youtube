@@ -253,6 +253,7 @@ const RouteWrapper = (props) => {
       </Routes>
 
       <Sidebar
+        className="sidebar"
         sidebar={sidebar}
         sidebarRef={sidebarRef}
         sidebarCloseBtnRef={sidebarCloseBtnRef}
