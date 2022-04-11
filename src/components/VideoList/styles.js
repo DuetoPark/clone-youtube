@@ -96,9 +96,11 @@ export const StyledVideoInfoInSearch = styled.div`
   }
 
   ${media.greaterThan('tablet')`
-    .title {
-      ${textStyle('xl')};
-    }
+    .info-top {
+      .title {
+        ${textStyle('xl')};
+      }
+    }  
   `}
 `;
 
