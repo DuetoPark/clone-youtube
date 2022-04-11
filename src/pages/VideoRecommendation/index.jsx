@@ -6,16 +6,16 @@ import TabHeader from './TabHeader';
 
 import { StyledRecommendation } from './styles';
 
-const VideoRecommendationPage = (props) => {
+const VideoRecommendationPage = ({ menu, onMenu, videos, onVideo }) => {
   return (
     <main>
       <h1 className="visually-hidden">본문</h1>
 
-      <MiniSidebar menu={props.menu} onMenu={props.onMenu} />
+      <MiniSidebar menu={menu} onMenu={onMenu} />
 
       <StyledRecommendation className="video-recommendation">
         <TabHeader />
-        <VideoList onPage={props.onPage} videos={props.videos} />
+        <VideoList videos={videos} onVideo={onVideo} />
       </StyledRecommendation>
     </main>
   );

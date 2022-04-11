@@ -8,18 +8,16 @@ import Filter from './Filter';
 
 import { StyledSearchResult } from './styles';
 
-const SearchResultPage = (props) => {
+const SearchResultPage = ({ menu, videos, onMenu, onVideo }) => {
   const { isMobile } = useResponsive();
 
   return (
     <main>
-      <h1 className="visually-hidden">본문</h1>
-
-      <MiniSidebar menu={props.menu} onMenu={props.onMenu} />
+      <MiniSidebar menu={menu} onMenu={onMenu} />
 
       <StyledSearchResult className="search-result">
         {!isMobile && <Filter />}
-        <VideoList onPage={props.onPage} videos={props.videos} />
+        <VideoList videos={videos} onVideo={onVideo} />
       </StyledSearchResult>
     </main>
   );

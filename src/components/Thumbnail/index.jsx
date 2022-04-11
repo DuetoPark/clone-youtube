@@ -1,29 +1,25 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-const Thumbnail = (props) => {
 import { usePrint } from '../../hooks';
 
 import { StyledThumbnail } from './styles';
 
+const Thumbnail = ({ video, onVideo }) => {
   const { printDuration } = usePrint();
 
-  const getVideoComments = useCallback(() => {
-    const { id } = props.video;
-    props.onPage(id);
-  }, [props]);
+  const changeSelectVideo = useCallback(() => {
+    onVideo(video);
+  }, [onVideo, video]);
 
   return (
     <StyledThumbnail
       as={Link}
       to="/video"
       className="thumbnail"
-      onClick={getVideoComments}
+      onClick={changeSelectVideo}
     >
-      <img
-        src={props.video.snippet.thumbnails.high.url}
-        alt={props.video.snippet.title}
-      />
+      <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
       <span className="duration">{printDuration(video)}</span>
     </StyledThumbnail>
   );

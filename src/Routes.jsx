@@ -6,13 +6,13 @@ import Sidebar from './components/Sidebar';
 
 import VideoRecommendationPage from './pages/VideoRecommendation';
 import SearchResultPage from './pages/SearchResult';
-import VideoViewPage from './pages/VideoView';
+import PlayerPage from './pages/PlayerPage';
 
 import Modal from './app/modal';
 
 const RouteWrapper = (props) => {
   const [videos, setVideos] = useState([]);
-  const [currentVideoId, setCurrentVideoId] = useState('');
+  const [selectVideo, setSelectVideo] = useState('');
   const [menu, setMenu] = useState({
     gnb: [
       { id: 1, category: 'upload', active: false },
@@ -194,6 +194,16 @@ const RouteWrapper = (props) => {
     toggleHomeButton();
   }, [toggleHomeButton]);
 
+  // ------------------
+  // NOTE: Video Control
+  // ------------------
+  const changeSeledtedVideo = useCallback(
+    (video) => {
+      setSelectVideo((prev) => video);
+    },
+    [setSelectVideo]
+  );
+
   return (
     <React.Fragment>
       <GlobalHeader
@@ -215,7 +225,7 @@ const RouteWrapper = (props) => {
               menu={menu}
               onMenu={changeMenuState}
               videos={videos}
-              onPage={getVideoComments}
+              onVideo={changeSeledtedVideo}
             />
           }
         ></Route>
@@ -227,14 +237,20 @@ const RouteWrapper = (props) => {
               menu={menu}
               onMenu={changeMenuState}
               videos={videos}
-              onPage={getVideoComments}
+              onVideo={changeSeledtedVideo}
             />
           }
         ></Route>
 
         <Route
           path="/video"
-          element={<PlayerPage video={selectVideo} youtube={props.youtube} />}
+          element={
+            <PlayerPage
+              selectVideo={selectVideo}
+              videos={videos}
+              onVideo={changeSeledtedVideo}
+            />
+          }
         ></Route>
       </Routes>
 
