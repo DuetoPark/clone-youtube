@@ -8,12 +8,16 @@ import { GlobalStyle } from './globalStyles';
 
 import RouteWrapper from './Routes';
 
+import Request from './app/request';
+
+const youtube = new Request();
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <RouteWrapper />
+        <RouteWrapper youtube={youtube} />
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
