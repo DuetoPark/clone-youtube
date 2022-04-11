@@ -104,7 +104,9 @@ const VideoInfo = ({ className, video, onVideo }) => {
             </h1>
 
             <div className="detail">
-              <strong className="channel">{video.snippet.channelTitle}</strong>
+              <strong className="channel-name">
+                {video.snippet.channelTitle}
+              </strong>
 
               <span className="view-count">
                 조회수 <strong>{printView(video)}</strong>회

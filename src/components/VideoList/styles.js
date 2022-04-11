@@ -35,6 +35,10 @@ export const StyledVideoItem = styled.li`
       }
     }
 
+    .desc {
+      ${lineClamp(2)};
+    }
+
     ${media.greaterThan('mobile')`
       .title {
         ${lineClamp(2)}
@@ -113,7 +117,7 @@ export const StyledVideoInfoInPlayer = styled.div`
     padding-right: 40px;
   }
 
-  .channel {
+  .channel-name {
     ${textStyle('sm')};
     color: ${({ theme }) => theme.colors.secondary};
   }
@@ -123,9 +127,13 @@ export const StyledVideoInfoInPlayer = styled.div`
       flex-wrap: wrap;
     }
 
-    .channel {
+    .channel-name {
       display: block;
       width: 100%;
+
+      &::after {
+        display: none;
+      }
     }
   `};
 `;
