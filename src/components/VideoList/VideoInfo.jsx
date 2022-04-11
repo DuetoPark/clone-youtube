@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useResponsive, usePathname } from '../../hooks';
+import { useResponsive, usePathname, usePrint } from '../../hooks';
 import Avatar from '../Avatar';
 
 import {
@@ -11,45 +11,10 @@ import {
 } from './styles';
 
 const VideoInfo = (props) => {
-  const calcPublishedDate = useCallback(() => {
-    const publishedDate = props.video.snippet.publishedAt.split('T')[0];
-    const [year, month, date] = publishedDate.split('-');
+  const { isMobile } = useResponsive();
+  const { isHome, isSearch, isPlayer } = usePathname();
+  const { printView, printDate } = usePrint();
 
-    const now = new Date();
-    const yearAmount = now.getFullYear() - year;
-    const monthAmount = now.getMonth() - month;
-    const dateAmount = now.getDate() - date;
-
-    if (yearAmount > 0) {
-      return `${yearAmount}년 `;
-    } else if (monthAmount > 0) {
-      return `${monthAmount}달 `;
-    } else if (dateAmount > 0) {
-      return `${dateAmount}일 `;
-    } else {
-      return;
-    }
-  }, [props]);
-
-  const returnViewCount = useCallback(() => {
-    const { viewCount } = props.video.statistics;
-
-    if (viewCount > 100000) {
-      const divided = Math.floor(viewCount / 10000);
-      return `${divided.toLocaleString()}만`;
-    } else if (viewCount >= 10000) {
-      const divided = (viewCount / 10000).toFixed(1);
-      return `${divided.toLocaleString()}만`;
-    } else if (viewCount >= 1000) {
-      const divided = (viewCount / 1000).toFixed(1);
-      return `${divided.toLocaleString()}천`;
-    } else {
-      return Number(viewCount).toLocaleString();
-    }
-  }, [props]);
-
-  const { isMobile, isTablet } = useResponsive();
-  const { PN, isHome, isSearch, isPlayer } = usePathname();
 
   return (
     <React.Fragment>
@@ -75,11 +40,11 @@ const VideoInfo = (props) => {
               </strong>
 
               <span className="view-count">
-                조회수 <strong>{returnViewCount()}</strong>회
+                조회수 <strong>{printView(props.video)}</strong>회
               </span>
 
               <span className="published">
-                <span>{calcPublishedDate()}</span>전
+                <span>{printDate(props.video)}</span>전
               </span>
             </div>
           </Link>
@@ -95,10 +60,10 @@ const VideoInfo = (props) => {
 
             <div className="detail">
               <span className="view-count">
-                조회수 <strong>{returnViewCount()}</strong>회
+                조회수 <strong>{printView(props.video)}</strong>회
               </span>
               <span className="published">
-                <span>{calcPublishedDate()}</span>전
+                <span>{printDate(props.video)}</span>전
               </span>
             </div>
           </Link>
@@ -139,12 +104,12 @@ const VideoInfo = (props) => {
               </strong>
 
               <span className="view-count">
-                조회수 <strong>{returnViewCount()}</strong>회
+                조회수 <strong>{printView(props.video)}</strong>회
               </span>
 
               {isTablet && (
                 <span className="published">
-                  <span>{calcPublishedDate()}</span>전
+                  <span>{printDate(props.video)}</span>전
                 </span>
               )}
             </div>
