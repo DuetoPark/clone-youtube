@@ -129,8 +129,7 @@ const RouteWrapper = (props) => {
   // NOTE: Menu Control
   // ------------------
   const changeMenuState = useCallback(
-    (event) => {
-      const target = event.target;
+    (target) => {
       const { category, menu } = target.dataset || false;
 
       if (!category || !menu) return;
@@ -151,6 +150,22 @@ const RouteWrapper = (props) => {
       });
     },
     [setMenu]
+  );
+
+  const handleMenu = useCallback(
+    (event) => {
+      const target = event.target;
+      changeMenuState(target);
+
+      if (target.dataset.menu === 'gnb') return;
+
+      props.youtube
+        .mostPopular() //
+        .then((items) => setVideos((prev) => items));
+
+      sidebar.close();
+    },
+    [changeMenuState, props, sidebar]
   );
 
   const toggleHomeButton = useCallback(() => {
@@ -196,7 +211,7 @@ const RouteWrapper = (props) => {
         menuItems={menu.gnb}
         onHome={getPopularVideos}
         onSearch={getSearchResult}
-        onButton={changeMenuState}
+        onButton={handleMenu}
         onInput={removeInputText}
       />
 
@@ -206,7 +221,7 @@ const RouteWrapper = (props) => {
           element={
             <VideoRecommendationPage
               menu={menu}
-              onMenu={changeMenuState}
+              onMenu={handleMenu}
               videos={videos}
               onVideo={changeSeledtedVideo}
             />
@@ -218,7 +233,7 @@ const RouteWrapper = (props) => {
           element={
             <SearchResultPage
               menu={menu}
-              onMenu={changeMenuState}
+              onMenu={handleMenu}
               videos={videos}
               onVideo={changeSeledtedVideo}
             />
@@ -243,7 +258,7 @@ const RouteWrapper = (props) => {
         sidebarCloseBtnRef={sidebarCloseBtnRef}
         menu={menu}
         onHome={getPopularVideos}
-        onMenu={changeMenuState}
+        onMenu={handleMenu}
       />
     </React.Fragment>
   );
