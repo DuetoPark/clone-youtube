@@ -105,23 +105,6 @@ const RouteWrapper = (props) => {
     [props, inputRef]
   );
 
-  const getVideoComments = (id) => {
-    setCurrentVideoId(id);
-
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-
-    // fetch(
-    //   `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=50&textFormat=plainText&videoId=${currentVideoId}&key=AIzaSyAIJ8l3hDl5ZM3fUiDISB0SX1mP_K7gFbg`,
-    //   requestOptions
-    // )
-    //   .then((response) => response.json())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log('error', error));
-  };
-
   useEffect(() => {
     getPopularVideos();
   }, [getPopularVideos]);

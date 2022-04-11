@@ -104,8 +104,6 @@ class Request {
       return { ...video, channel: matchedChannel.snippet };
     });
 
-    console.log(newVideoItems);
-
     return newVideoItems;
   }
 }
