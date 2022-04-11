@@ -10,11 +10,14 @@ import {
   StyledVideoInfoInPlayer,
 } from './styles';
 
-const VideoInfo = (props) => {
+const VideoInfo = ({ video, onVideo }) => {
   const { isMobile } = useResponsive();
   const { isHome, isSearch, isPlayer } = usePathname();
   const { printView, printDate } = usePrint();
 
+  const changeSelectVideo = useCallback(() => {
+    onVideo(video);
+  }, [onVideo, video]);
 
   return (
     <React.Fragment>
@@ -23,28 +26,28 @@ const VideoInfo = (props) => {
           <div className="info-left">
             <Avatar
               className="avatar"
-              video={props.video}
+              video={video}
               size={isMobile ? 'lg' : 'md'}
               address="./index.html"
             />
           </div>
 
-          <Link to="/video" className="info-right">
-            <h1 className="title" title={props.video.snippet.title}>
-              {props.video.snippet.title}
+          <Link to="/video" className="info-right" onClick={changeSelectVideo}>
+            <h1 className="title" title={video.snippet.title}>
+              {video.snippet.title}
             </h1>
 
             <div className="detail">
               <strong className="channel-name">
-                {props.video.snippet.channelTitle}
+                {video.snippet.channelTitle}
               </strong>
 
               <span className="view-count">
-                조회수 <strong>{printView(props.video)}</strong>회
+                조회수 <strong>{printView(video)}</strong>회
               </span>
 
               <span className="published">
-                <span>{printDate(props.video)}</span>전
+                <span>{printDate(video)}</span>전
               </span>
             </div>
           </Link>
@@ -53,63 +56,63 @@ const VideoInfo = (props) => {
 
       {isSearch && (
         <StyledVideoInfoInSearch className="video-info">
-          <Link to="/video" className="info-top">
-            <h1 className="title" title={props.video.snippet.title}>
-              {props.video.snippet.title}
+          <Link to="/video" className="info-top" onClick={changeSelectVideo}>
+            <h1 className="title" title={video.snippet.title}>
+              {video.snippet.title}
             </h1>
 
             <div className="detail">
               <span className="view-count">
-                조회수 <strong>{printView(props.video)}</strong>회
+                조회수 <strong>{printView(video)}</strong>회
               </span>
               <span className="published">
-                <span>{printDate(props.video)}</span>전
+                <span>{printDate(video)}</span>전
               </span>
             </div>
           </Link>
 
           <div className="info-bottom">
             <div className="channel">
-              <Avatar video={props.video} address="/video" />
+              <Avatar video={video} address="/video" />
 
               <strong className="channel-name">
-                {props.video.snippet.channelTitle}
+                {video.snippet.channelTitle}
               </strong>
             </div>
 
-            <p className="desc">{props.video.snippet.description}</p>
+            <p className="desc">{video.snippet.description}</p>
           </div>
         </StyledVideoInfoInSearch>
       )}
 
       {isPlayer && (
         <StyledVideoInfoInPlayer className="video-info">
-          <div className="info-left">
-            <Avatar
-              className="avatar"
-              video={props.video}
-              address="/video"
-              size={'lg'}
-            />
-          </div>
+          {isMobile && (
+            <div className="info-left">
+              <Avatar
+                className="avatar"
+                video={video}
+                address="/video"
+                size={'lg'}
+              />
+            </div>
+          )}
 
-          <Link to="/video" className="info-right">
-            <h1 className="title" title={props.video.snippet.title}>
-              {props.video.snippet.title}
+          <Link to="/video" className="info-right" onClick={changeSelectVideo}>
+            <h1 className="title" title={video.snippet.title}>
+              {video.snippet.title}
             </h1>
 
             <div className="detail">
-              <strong className="channel">
-                {props.video.snippet.channelTitle}
-              </strong>
+              <strong className="channel">{video.snippet.channelTitle}</strong>
 
               <span className="view-count">
-                조회수 <strong>{printView(props.video)}</strong>회
+                조회수 <strong>{printView(video)}</strong>회
               </span>
 
-              {isTablet && (
+              {!isMobile && (
                 <span className="published">
-                  <span>{printDate(props.video)}</span>전
+                  <span>{printDate(video)}</span>전
                 </span>
               )}
             </div>
