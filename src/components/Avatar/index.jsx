@@ -5,7 +5,7 @@ import { StyledAvatar } from './styles';
 
 const Avatar = ({ video, size, address, className }) => {
   if (address) {
-    if (video.avatarURL) {
+    if (video.channel) {
       return (
         <StyledAvatar
           as={Link}
@@ -14,7 +14,10 @@ const Avatar = ({ video, size, address, className }) => {
           size={size}
           title={video.snippet.channelTitle}
         >
-          <img src={video.avatarURL} alt={video.snippet.channelTitle} />
+          <img
+            src={video.channel.thumbnails.default.url}
+            alt={video.snippet.channelTitle}
+          />
         </StyledAvatar>
       );
     } else {
@@ -30,7 +33,7 @@ const Avatar = ({ video, size, address, className }) => {
     }
   }
 
-  if (video.avatarURL) {
+  if (video.channel) {
     return (
       <StyledAvatar
         className={`avatar ${className}`}
@@ -38,10 +41,14 @@ const Avatar = ({ video, size, address, className }) => {
         size={size}
         title={video.snippet.channelTitle}
       >
-        <img src={video.avatarURL} alt={video.snippet.channelTitle} />
+        <img
+          src={video.channel.thumbnails.default.url}
+          alt={video.snippet.channelTitle}
+        />
       </StyledAvatar>
     );
   }
+
   return (
     <StyledAvatar
       className={`avatar ${className}`}
