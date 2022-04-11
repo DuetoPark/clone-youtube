@@ -19,7 +19,7 @@ const VideoRecommendationPage = ({
       <MiniSidebar className="mini-sidebar" menu={menu} onMenu={onMenu} />
 
       <StyledRecommendation className="video-recommendation">
-        <TabHeader tab={tab} onTab={onTab} />
+        <TabHeader className="tab-header" tab={tab} onTab={onTab} />
         <VideoList className="video-list" videos={videos} onVideo={onVideo} />
       </StyledRecommendation>
     </main>

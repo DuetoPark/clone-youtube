@@ -7,11 +7,11 @@ import { QuestIcon } from '../../assets';
 
 import { StyledTabHeader } from './styles';
 
-const TabHeader = memo(({ tab, onTab }) => {
+const TabHeader = memo(({ className, tab, onTab }) => {
   const { isMobile } = useResponsive();
 
   return (
-    <StyledTabHeader>
+    <StyledTabHeader className={className}>
       {isMobile && (
         <button className="quest-button" type="button">
           <QuestIcon aria-hidden="true" />
