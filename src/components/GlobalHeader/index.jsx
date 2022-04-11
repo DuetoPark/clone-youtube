@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useResponsive } from '../../hooks';
+import Modal from '../../app/modal';
 
 import Avatar from '../Avatar';
 import GnbSearch from './GnbSearch';
@@ -13,6 +14,7 @@ import {
   AppIcon,
   AppFilledIcon,
   AuthIcon,
+  ArrowIcon,
   BellIcon,
   BellFilledIcon,
   MenuIcon,
@@ -75,6 +77,23 @@ const GlobalHeader = ({
     sidebar.open();
   }, [sidebar]);
 
+  const searchGroupRef = useRef();
+  const searchTriggerRef = useRef();
+  const searchCloseBtnRef = useRef();
+  const mobileSearch = new Modal(
+    searchGroupRef.current,
+    searchTriggerRef.current,
+    searchCloseBtnRef.current
+  );
+
+  const openMobileSearch = useCallback(() => {
+    mobileSearch.open();
+  }, [mobileSearch]);
+
+  const closeMobileSearch = useCallback(() => {
+    mobileSearch.close();
+  }, [mobileSearch]);
+
   return (
     <StyledGlobalHeader className={className}>
       <div className="gnb-left">
@@ -118,13 +137,44 @@ const GlobalHeader = ({
 
       <div className="gnb-right">
         {isMobile && (
-          <StyledGnbIconButton
-            className="gnb-icon-button is-search"
-            aria-label="검색 창 열기"
-            type="button"
-          >
-            <SearchIcon aria-hidden="true" />
-          </StyledGnbIconButton>
+          <React.Fragment>
+            <StyledGnbIconButton
+              className="gnb-icon-button is-search"
+              aria-label="검색 창 열기"
+              type="button"
+              ref={searchTriggerRef}
+              onClick={openMobileSearch}
+            >
+              <SearchIcon aria-hidden="true" />
+            </StyledGnbIconButton>
+
+            <div className="search-group" ref={searchGroupRef}>
+              <StyledGnbIconButton
+                className="gnb-icon-button close-button"
+                aria-label="검색 창 닫기"
+                type="button"
+                ref={searchCloseBtnRef}
+                onClick={closeMobileSearch}
+              >
+                <ArrowIcon aria-hidden="true" />
+              </StyledGnbIconButton>
+
+              <GnbSearch
+                className="search-form"
+                onSearch={onSearch}
+                onInput={onInput}
+                inputRef={inputRef}
+              >
+                <StyledGnbIconButton
+                  className="gnb-icon-button is-voice"
+                  aria-label="음성으로 검색하기"
+                  type="button"
+                >
+                  <VoiceIcon aria-hidden="true" />
+                </StyledGnbIconButton>
+              </GnbSearch>
+            </div>
+          </React.Fragment>
         )}
 
         {/* NOTE: 로그인을 한 경우 */}
