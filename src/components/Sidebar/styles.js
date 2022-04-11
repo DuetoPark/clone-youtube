@@ -67,7 +67,7 @@ export const StyledSidebarNav = styled.nav`
         padding: 12px 0;
         border-bottom: 1px solid ${({ theme }) => theme.colors.borderGeneral};
 
-        .main-menu-item:nth-child(n + 5) {
+        .menu-item:nth-child(n + 5) {
           display: none;
         }
       }
@@ -76,12 +76,12 @@ export const StyledSidebarNav = styled.nav`
         padding: 8px 0;
 
         // NOTE: 로그인을 한 경우
-        // .main-menu-item:nth-child(-n + 4) {
+        // .menu-item:nth-child(-n + 4) {
         //   display: none;
         // }
 
         // NOTE: 로그인을 하지 않은 경우
-        .main-menu-item {
+        .menu-item {
           display: none;
 
           &:nth-child(n + 5):nth-child(-n + 6) {

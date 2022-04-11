@@ -9,6 +9,7 @@ const MiniSidebar = (props) => {
       <h1 className="visually-hidden">간편메뉴</h1>
 
       <MenuList
+        className="main-menu-list"
         menuType="main"
         menuItems={props.menu.main}
         onMenu={props.onMenu}

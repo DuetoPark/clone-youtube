@@ -1,23 +1,20 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 
 import MenuItem from './MenuItem';
 
 import { StyledMenuList } from './styles';
 
-const MenuList = memo((props) => {
+const MenuList = memo(({ className, menuType, menuItems, onMenu }) => {
   return (
-    <StyledMenuList
-      className={`${props.menuType}-menu-list`}
-      onClick={props.onMenu}
-    >
-      {props.menuItems.map((item) => {
+    <StyledMenuList className={className} onClick={onMenu}>
+      {menuItems.map((item) => {
         const { id, category, active } = item;
 
         return (
           <MenuItem
             key={id}
-            className={`${active ? 'is-active' : ''}`}
-            menuType={props.menuType}
+            className={`${active ? 'menu-item is-active' : 'menu-item'}`}
+            menuType={menuType}
             category={category}
             active={active}
           ></MenuItem>

@@ -44,12 +44,14 @@ const Sidebar = (props) => {
 
           <div className="menu-group is-common">
             <MenuList
+              className="main-menu-list"
               menuType="main"
               menuItems={props.menu.main}
               onMenu={props.onMenu}
             />
 
             <MenuList
+              className="main-menu-list"
               menuType="main"
               menuItems={props.menu.main}
               onMenu={props.onMenu}
@@ -73,6 +75,7 @@ const Sidebar = (props) => {
             <h2 className="menu-title">인기 YOUTUBE</h2>
 
             <MenuList
+              className="popular-menu-list"
               menuType="popular"
               menuItems={props.menu.popular}
               onMenu={props.onMenu}
@@ -81,6 +84,7 @@ const Sidebar = (props) => {
 
           <div className="menu-group is-find">
             <MenuList
+              className="find-menu-list"
               menuType="find"
               menuItems={props.menu.find}
               onMenu={props.onMenu}
@@ -91,6 +95,7 @@ const Sidebar = (props) => {
             <h2 className="menu-title">YOUTUBE 더보기</h2>
 
             <MenuList
+              className="moreNotUser-menu-list"
               menuType="moreNotUser"
               menuItems={props.menu.moreNotUser}
               onMenu={props.onMenu}
@@ -102,6 +107,7 @@ const Sidebar = (props) => {
             <h2 className="menu-title">YOUTUBE 더보기</h2>
 
             <MenuList
+              className="moreUser-menu-list"
               menuType="moreUser"
               menuItems={props.menu.moreUser}
               onMenu={props.onMenu}
@@ -110,6 +116,7 @@ const Sidebar = (props) => {
 
           <div className="menu-group is-service">
             <MenuList
+              className="service-menu-list"
               menuType="service"
               menuItems={props.menu.service}
               onMenu={props.onMenu}

@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 
-import { StyledMenu } from './styles';
+import { StyledMenuItem } from './styles';
 
 import {
   HomeIcon,
@@ -143,19 +144,19 @@ function getIcon(category, active) {
   }
 }
 
-const MenuItem = memo((props) => {
+const MenuItem = memo(({ className, menuType, category, active }) => {
   return (
-    <li className={`${props.menuType}-menu-item ${props.className}`}>
-      <StyledMenu
-        className={`menu`}
+    <StyledMenuItem className={className}>
+      <Link
+        className="menu"
         to="/"
-        data-category={props.category}
-        data-menu={props.menuType}
+        data-category={category}
+        data-menu={menuType}
       >
-        {getIcon(props.category, props.active)}
-        {props.category}
-      </StyledMenu>
-    </li>
+        {getIcon(category, active)}
+        {category}
+      </Link>
+    </StyledMenuItem>
   );
 });
 

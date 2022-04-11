@@ -22,7 +22,7 @@ export const StyledMiniSidebar = styled.nav`
     ${flexbox()};
   }
 
-  .main-menu-item {
+  .menu-item {
     &.is-active {
       background-color: ${({ theme }) => theme.colors.white};
     }
@@ -57,7 +57,7 @@ export const StyledMiniSidebar = styled.nav`
       flex-direction: column;
     }
 
-    .main-menu-item{
+    .menu-item{
       &:nth-child(2) {
         display: block;
       }

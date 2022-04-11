@@ -18,22 +18,24 @@ export const StyledMenuList = styled.ul`
   }
 `;
 
-export const StyledMenu = styled.a`
-  ${flexbox('start')};
-  width: 100%;
-  height: 40px;
-  padding-left: 24px;
+export const StyledMenuItem = styled.li`
+  .menu {
+    ${flexbox('start')};
+    width: 100%;
+    height: 40px;
+    padding-left: 24px;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.backgroundHover};
-  }
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.backgroundHover};
+    }
 
-  &:active {
-    background-color: ${({ theme }) => theme.colors.borderDark};
-  }
+    &:active {
+      background-color: ${({ theme }) => theme.colors.borderDark};
+    }
 
-  svg {
-    pointer-events: none;
-    margin-right: 24px;
+    svg {
+      pointer-events: none;
+      margin-right: 24px;
+    }
   }
 `;
