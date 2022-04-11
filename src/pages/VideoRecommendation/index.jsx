@@ -9,9 +9,7 @@ import { StyledRecommendation } from './styles';
 const VideoRecommendationPage = ({ menu, onMenu, videos, onVideo }) => {
   return (
     <main>
-      <h1 className="visually-hidden">본문</h1>
-
-      <MiniSidebar menu={menu} onMenu={onMenu} />
+      <MiniSidebar className="mini-sidebar" menu={menu} onMenu={onMenu} />
 
       <StyledRecommendation className="video-recommendation">
         <TabHeader />

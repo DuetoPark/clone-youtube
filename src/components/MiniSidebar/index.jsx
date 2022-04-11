@@ -3,16 +3,16 @@ import MenuList from '../MenuList';
 
 import { StyledMiniSidebar } from './styles';
 
-const MiniSidebar = (props) => {
+const MiniSidebar = ({ className, menu, onMenu }) => {
   return (
-    <StyledMiniSidebar className="mini-sidebar">
+    <StyledMiniSidebar className={className}>
       <h1 className="visually-hidden">간편메뉴</h1>
 
       <MenuList
         className="main-menu-list"
         menuType="main"
-        menuItems={props.menu.main}
-        onMenu={props.onMenu}
+        menuItems={menu.main}
+        onMenu={onMenu}
       />
     </StyledMiniSidebar>
   );

@@ -13,7 +13,7 @@ const SearchResultPage = ({ menu, videos, onMenu, onVideo }) => {
 
   return (
     <main>
-      <MiniSidebar menu={menu} onMenu={onMenu} />
+      <MiniSidebar className="mini-sidebar" menu={menu} onMenu={onMenu} />
 
       <StyledSearchResult className="search-result">
         {!isMobile && <Filter />}
