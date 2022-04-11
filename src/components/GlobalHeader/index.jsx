@@ -23,7 +23,17 @@ import {
   VoiceIcon,
 } from '../../assets';
 
-const GlobalHeader = (props) => {
+const GlobalHeader = ({
+  className,
+  inputRef,
+  sidebar,
+  sidebarTriggerRef,
+  menuItems,
+  onHome,
+  onSearch,
+  onButton,
+  onInput,
+}) => {
   const { isMobile } = useResponsive();
   const [myChannel, setMyChannel] = useState({
     snippet: {
@@ -54,31 +64,29 @@ const GlobalHeader = (props) => {
 
   const getMenuState = useCallback(
     (category) => {
-      const menuData = props.menuItems.filter(
-        (item) => item.category === category
-      );
+      const menuData = menuItems.filter((item) => item.category === category);
 
       return menuData[0].active;
     },
-    [props]
+    [menuItems]
   );
 
   const openSidebar = useCallback(() => {
-    props.sidebar.open();
-  }, [props]);
+    sidebar.open();
+  }, [sidebar]);
 
   return (
-    <StyledGlobalHeader className="gnb">
+    <StyledGlobalHeader className={className}>
       <div className="gnb-left">
         <h1 className="logo">
-          <Link to="/" onClick={props.onHome} aria-label="유튜브 홈">
+          <Link to="/" onClick={onHome} aria-label="유튜브 홈">
             <Logo aria-hidden="true" />
           </Link>
         </h1>
 
         {!isMobile && (
           <StyledGnbIconButton
-            ref={props.sidebarTriggerRef}
+            ref={sidebarTriggerRef}
             className="gnb-icon-button is-menu"
             onClick={openSidebar}
             aria-label="메뉴 열기"
@@ -93,9 +101,9 @@ const GlobalHeader = (props) => {
         {!isMobile && (
           <GnbSearch
             className="search-form"
-            onSearch={props.onSearch}
-            onInput={props.onInput}
-            inputRef={props.inputRef}
+            onSearch={onSearch}
+            onInput={onInput}
+            inputRef={inputRef}
           >
             <StyledGnbIconButton
               className="gnb-icon-button is-voice"
@@ -122,7 +130,7 @@ const GlobalHeader = (props) => {
         {/* NOTE: 로그인을 한 경우 */}
         {/* <div
             className="button-group"
-            onClick={props.onButton};
+            onClick={onButton};
             }}
           >
           {!isMobile && (
@@ -171,7 +179,7 @@ const GlobalHeader = (props) => {
         )}
 
         {!isMobile && (
-          <div className="button-group" onClick={props.onButton}>
+          <div className="button-group" onClick={onButton}>
             <StyledGnbIconButton
               className="gnb-icon-button is-app"
               aria-label="유튜브 앱 메뉴 열기"

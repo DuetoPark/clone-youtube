@@ -97,7 +97,6 @@ const RouteWrapper = (props) => {
         .search(inputRef.current.value) //
         .then((items) => {
           setVideos((prev) => items);
-          console.log(items);
         });
 
       inputRef.current.blur();
@@ -190,6 +189,7 @@ const RouteWrapper = (props) => {
   return (
     <React.Fragment>
       <GlobalHeader
+        className="gnb"
         inputRef={inputRef}
         sidebar={sidebar}
         sidebarTriggerRef={sidebarTriggerRef}
