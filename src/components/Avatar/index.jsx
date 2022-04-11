@@ -10,7 +10,7 @@ const Avatar = ({ video, size, address, className }) => {
         <StyledAvatar
           as={Link}
           to={address}
-          className={`avatar ${className}`}
+          className={className}
           size={size}
           title={video.snippet.channelTitle}
         >
@@ -25,7 +25,7 @@ const Avatar = ({ video, size, address, className }) => {
         <StyledAvatar
           as={Link}
           to={address}
-          className={`avatar ${className}`}
+          className={className}
           size={size}
           title={video.snippet.channelTitle}
         ></StyledAvatar>
@@ -36,7 +36,7 @@ const Avatar = ({ video, size, address, className }) => {
   if (video.channel) {
     return (
       <StyledAvatar
-        className={`avatar ${className}`}
+        className={className}
         type="button"
         size={size}
         title={video.snippet.channelTitle}
@@ -51,7 +51,7 @@ const Avatar = ({ video, size, address, className }) => {
 
   return (
     <StyledAvatar
-      className={`avatar ${className}`}
+      className={className}
       type="button"
       size={size}
       title={video.snippet.channelTitle}

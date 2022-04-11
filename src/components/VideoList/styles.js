@@ -89,10 +89,8 @@ export const StyledVideoInfoInSearch = styled.div`
     ${flexbox('start')};
     padding: 12px 0;
 
-    a {
+    .avatar {
       flex-shrink: 0;
-      width: 24px;
-      height: 24px;
       margin-right: 8px;
     }
   }

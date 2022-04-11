@@ -28,7 +28,6 @@ const VideoInfo = ({ className, video, onVideo }) => {
               className="avatar"
               video={video}
               size={isMobile ? 'lg' : 'md'}
-              address="./index.html"
             />
           </div>
 
@@ -73,7 +72,7 @@ const VideoInfo = ({ className, video, onVideo }) => {
 
           <div className="info-bottom">
             <div className="channel">
-              <Avatar video={video} address="/player" />
+              <Avatar className="avatar" size={'xs'} video={video} />
 
               <strong className="channel-name">
                 {video.snippet.channelTitle}
@@ -89,12 +88,7 @@ const VideoInfo = ({ className, video, onVideo }) => {
         <StyledVideoInfoInPlayer className="video-info">
           {isMobile && (
             <div className="info-left">
-              <Avatar
-                className="avatar"
-                video={video}
-                address="/player"
-                size={'lg'}
-              />
+              <Avatar className="avatar" video={video} size={'lg'} />
             </div>
           )}
 

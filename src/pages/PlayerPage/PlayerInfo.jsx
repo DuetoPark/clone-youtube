@@ -42,7 +42,11 @@ const PlayerInfo = ({ className, selectVideo }) => {
   return (
     <StyledVideoInfo className={className}>
       <div className="video-channel">
-        <Avatar video={selectVideo} size={isMobile ? 'base' : 'xl'} />
+        <Avatar
+          className="avatar"
+          video={selectVideo}
+          size={isMobile ? 'base' : 'xl'}
+        />
 
         <div className="channel-overview">
           <strong className="name">{selectVideo.snippet.channelTitle}</strong>

@@ -162,7 +162,7 @@ const GlobalHeader = ({
           )}
 
           <Avatar
-            className="profile-button"
+            className="avatar profile-button"
             aria-label="프로필 메뉴 열기"
             video={myChannel}
             size={isMobile ? 'xs' : 'sm'}
