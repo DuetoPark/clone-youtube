@@ -15,7 +15,7 @@ const SEARCH_RESULT_MARGIN = `calc(${MINISIDEBAR_HEIGHT_MOBILE} + ${VIDEO_LIST_M
 export const StyledSearchResult = styled.div`
   padding: 12px;
   padding-bottom: ${SEARCH_RESULT_MARGIN};
-  background: ${({ theme }) => theme.colors.backgroundGeneral};
+  background-color: ${({ theme }) => theme.colors.backgroundGeneral};
 
   .filter {
     margin-bottom: 16px;
