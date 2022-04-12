@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useCallback } from 'react';
+import React, { memo } from 'react';
 
 import { useResponsive } from '../../hooks';
 
