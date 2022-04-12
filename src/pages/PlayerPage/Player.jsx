@@ -9,7 +9,7 @@ const Player = ({ className, selectVideo, children }) => {
         <iframe
           title="player"
           type="text/html"
-          src={`https://www.youtube.com/embed/${selectVideo.id}`}
+          src={`https://www.youtube.com/embed/${selectVideo.id}?autoplay=1&mute=1`}
           frameBorder="0"
           allowFullScreen
         />
