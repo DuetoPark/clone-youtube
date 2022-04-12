@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import MenuItem from './MenuItem';
 
 import { StyledMenuList } from './styles';
 
-const MenuList = memo(({ className, menuType, menuItems, onMenu }) => {
+const MenuList = ({ className, menuType, menuItems, onMenu }) => {
   return (
     <StyledMenuList className={className} onClick={onMenu}>
       {menuItems.map((item) => {
@@ -22,6 +22,6 @@ const MenuList = memo(({ className, menuType, menuItems, onMenu }) => {
       })}
     </StyledMenuList>
   );
-});
+};
 
 export default MenuList;
