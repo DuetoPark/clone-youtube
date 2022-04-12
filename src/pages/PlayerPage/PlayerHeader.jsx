@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { useResponsive, usePrint } from '../../hooks';
 
@@ -15,7 +15,7 @@ import {
 
 import { StyledPlayerHeader } from './styles';
 
-const PlayerHeader = ({ className, selectVideo }) => {
+const PlayerHeader = memo(({ className, selectVideo }) => {
   const { isMobile } = useResponsive();
   const { printView, printLike, printDate } = usePrint();
 
@@ -76,6 +76,6 @@ const PlayerHeader = ({ className, selectVideo }) => {
       </div>
     </StyledPlayerHeader>
   );
-};
+});
 
 export default PlayerHeader;

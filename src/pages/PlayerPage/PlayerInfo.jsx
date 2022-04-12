@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, memo } from 'react';
 
 import { useResponsive } from '../../hooks';
 
@@ -6,7 +6,7 @@ import Avatar from '../../components/Avatar';
 
 import { StyledVideoInfo } from './styles';
 
-const PlayerInfo = ({ className, selectVideo }) => {
+const PlayerInfo = memo(({ className, selectVideo }) => {
   const { isMobile } = useResponsive();
 
   const videoDescRef = useRef();
@@ -79,6 +79,6 @@ const PlayerInfo = ({ className, selectVideo }) => {
       )}
     </StyledVideoInfo>
   );
-};
+});
 
 export default PlayerInfo;
