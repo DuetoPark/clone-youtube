@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useResponsive } from '../../hooks';
@@ -54,11 +54,14 @@ const GlobalHeader = ({
   const searchGroupRef = useRef();
   const searchTriggerRef = useRef();
   const searchCloseBtnRef = useRef();
-  const mobileSearch = new Modal(
-    searchGroupRef.current,
-    searchTriggerRef.current,
-    searchCloseBtnRef.current
-  );
+
+  const mobileSearch = useMemo(() => {
+    return new Modal(
+      searchGroupRef.current,
+      searchTriggerRef.current,
+      searchCloseBtnRef.current
+    );
+  }, [searchGroupRef, searchTriggerRef, searchCloseBtnRef]);
 
   const openMobileSearch = useCallback(() => {
     mobileSearch.open();
@@ -232,5 +235,4 @@ const GlobalHeader = ({
     </StyledGlobalHeader>
   );
 };
-
 export default GlobalHeader;
