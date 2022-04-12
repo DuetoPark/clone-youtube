@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { StyledTab } from './styles';
 
-const TabItem = memo(({ className, tab }) => {
+const TabItem = ({ className, tab }) => {
   return (
     <StyledTab className={className}>
       <button className="tab-button" type="button" data-category={tab.category}>
@@ -10,6 +10,6 @@ const TabItem = memo(({ className, tab }) => {
       </button>
     </StyledTab>
   );
-});
+};
 
 export default TabItem;
