@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import VideoItem from './VideoItem';
 
-const VideoList = ({ className, videos, onVideo }) => {
+const VideoList = memo(({ className, videos, onVideo }) => {
   return (
     <ol className={className}>
       {videos.map((video) => {
@@ -16,6 +16,6 @@ const VideoList = ({ className, videos, onVideo }) => {
       })}
     </ol>
   );
-};
+});
 
 export default VideoList;
