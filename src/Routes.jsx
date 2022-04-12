@@ -87,6 +87,8 @@ const RouteWrapper = (props) => {
     props.youtube
       .mostPopular() //
       .then((items) => setVideos((prev) => items));
+
+    window.scrollTo(0, 0);
   }, [props, setVideos]);
 
   const getSearchResult = useCallback(
@@ -100,6 +102,8 @@ const RouteWrapper = (props) => {
         });
 
       inputRef.current.blur();
+
+      window.scrollTo(0, 0);
     },
     [props, inputRef]
   );
@@ -197,6 +201,7 @@ const RouteWrapper = (props) => {
   const changeSeledtedVideo = useCallback(
     (video) => {
       setSelectVideo((prev) => video);
+      window.scrollTo(0, 0);
     },
     [setSelectVideo]
   );
