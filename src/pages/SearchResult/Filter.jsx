@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState, memo } from 'react';
 
 import FilterWrapper from './FilterWrapper';
 import { FilterIcon, FilterFilledIcon } from '../../assets';
 
 import { StyledFilter } from './styles';
 
-const Filter = (props) => {
+const Filter = memo((props) => {
   const [filter, setFilter] = useState({
     upload: [
       { id: 1, category: '지난 1시간', active: false },
@@ -100,6 +100,6 @@ const Filter = (props) => {
       </div>
     </StyledFilter>
   );
-};
+});
 
 export default Filter;

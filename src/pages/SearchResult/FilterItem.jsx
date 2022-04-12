@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const FilterItem = ({ className, filter }) => {
+const FilterItem = memo(({ className, filter }) => {
   return (
     <li className={className}>
       <button className="filter-button" type="button">
@@ -8,6 +8,6 @@ const FilterItem = ({ className, filter }) => {
       </button>
     </li>
   );
-};
+});
 
 export default FilterItem;

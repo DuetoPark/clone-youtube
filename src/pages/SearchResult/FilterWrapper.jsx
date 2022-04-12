@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import FilterItem from './FilterItem';
 
@@ -19,7 +19,7 @@ function getTitle(text) {
   }
 }
 
-const FilterWrapper = ({ className, id, filter }) => {
+const FilterWrapper = memo(({ className, id, filter }) => {
   return (
     <div className={className}>
       <h3 className="title">{getTitle(id)}</h3>
@@ -31,6 +31,6 @@ const FilterWrapper = ({ className, id, filter }) => {
       </ol>
     </div>
   );
-};
+});
 
 export default FilterWrapper;
