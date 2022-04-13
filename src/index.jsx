@@ -14,7 +14,7 @@ const youtube = new Request();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/clone-youtube">
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <RouteWrapper youtube={youtube} />

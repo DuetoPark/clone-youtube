@@ -5,23 +5,12 @@ import { usePathname } from '../../hooks';
 
 import { StyledTabList } from './styles';
 
-function getPage(pathname) {
-  switch (pathname) {
-    case '/':
-      return 'home';
-    case '/player':
-      return 'player';
-    default:
-      break;
-  }
-}
-
 const TabList = ({ className, tab, onTab }) => {
   const { PN } = usePathname();
   return (
     <StyledTabList
       className={className}
-      data-page={getPage(PN)}
+      data-page={PN === '' ? 'home' : PN}
       onClick={onTab}
     >
       {tab.map((item) => (

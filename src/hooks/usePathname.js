@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 function getPathname() {
   const { pathname } = window.location;
 
-  let PN = pathname;
+  let PN = pathname.split('/').pop();
   let isHome = true;
   let isSearch = false;
   let isPlayer = false;

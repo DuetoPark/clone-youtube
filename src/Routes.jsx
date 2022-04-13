@@ -68,29 +68,34 @@ const RouteWrapper = (props) => {
 
       window.scrollTo(0, 0);
     },
-    [props, inputRef]
+    [props.youtube, setVideos]
   );
 
-  useEffect(() => {
-    if (window.location.pathname !== '/') return;
-    getPopularVideos();
-  }, [getPopularVideos]);
-
-  useEffect(function changePageTitle() {
-    const pathname = window.location.pathname;
+  function changePageTitle() {
+    const pathname = window.location.pathname.split('/').pop();
     const titlePrefix = 'Youtube - ';
 
     switch (pathname) {
-      case '/search':
+      case 'search':
         document.title = `${titlePrefix}Search`;
         break;
-      case '/player':
+      case 'player':
         document.title = `${titlePrefix}Player`;
         break;
       default:
         document.title = `${titlePrefix}Home`;
         break;
     }
+  }
+
+  useEffect(() => {
+    const pathname = window.location.pathname.split('/').pop();
+    if (pathname) return;
+    getPopularVideos();
+  }, [getPopularVideos]);
+
+  useEffect(() => {
+    changePageTitle();
   });
 
   // ------------------
@@ -133,17 +138,17 @@ const RouteWrapper = (props) => {
 
       sidebar.close();
     },
-    [changeMenuState, props, sidebar]
+    [changeMenuState, props.youtube, setVideos, sidebar]
   );
 
   const toggleHomeButton = useCallback(() => {
-    const pathname = window.location.pathname;
+    const pathname = window.location.pathname.split('/').pop();
 
     setMenu((prevState) => {
       const newState = { ...prevState };
       const newMain = prevState.main.map((item) => {
         if (item.category === '홈') {
-          return { ...item, active: pathname === '/' ? true : false };
+          return { ...item, active: pathname === '' ? true : false };
         } else {
           return item;
         }
