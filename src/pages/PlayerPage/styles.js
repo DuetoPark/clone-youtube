@@ -33,6 +33,7 @@ export const StyledMain = styled.main`
     padding: 24px;
 
     .primary {
+      flex-grow: 1;
       min-width: ${PRIMARY_MIN_WIDTH};
       margin-right: 24px;
     }
