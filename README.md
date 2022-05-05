@@ -70,3 +70,5 @@ Input에 검색어를 입력하면 검색어 관련 동영상 목록이 출력
    Route와 Link를 통해 페이지 이동없이 URL을 조작하도록 구현했기 때문에,  
    메인이 아닌 페이지에서 새로고침을 하면 url에 해당되는 resource가 없으므로 에러가 발생합니다.  
    nginX를 사용하여, 새로고침을 하더라도 index.html로 이동하도록 조작해야 합니다.
+
+[페이지 보기 링크](https://duetopark.github.io/clone-youtube/)
