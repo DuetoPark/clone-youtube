@@ -8,53 +8,42 @@
 
 https://user-images.githubusercontent.com/69448900/163094834-474ac820-a58a-4e05-86d3-f5a054aad514.mov
 
-## 📌 소개
+## 📌 서비스
 
-### 서비스
+### 1. 인기 동영상 추천
 
-1. **인기 동영상 추천**  
-   메인 페이지로 이동하면 그 날의 인기 동영상 목록이 출력
-2. **동영상 검색**  
-   Input에 검색어를 입력하면 검색어 관련 동영상 목록이 출력
-3. **동영상 플레이어**  
-   시청을 원하는 동영상을 클릭하면 iframe이 출력
+메인 페이지로 이동하면 그 날의 인기 동영상 목록이 출력
 
-### 아키텍쳐
+### 2. 동영상 검색
 
-- Front-end
-  - UI 제작: React, Styled-components
-  - HTTP API 통신: AXIOS
-- Back-end: Node.js
+Input에 검색어를 입력하면 검색어 관련 동영상 목록이 출력
 
-### API
+### 3. 동영상 플레이어
 
-**YouTube Data APIs**
+시청을 원하는 동영상을 클릭하면 iframe이 출력
 
-- 사용: Search list, Videos list, Channels list
+## 💡 구조
 
-**Popular**
+### 1. Main Page
 
-> channels를 따로 요청하는 이유는 videos list에 채널의 thumbnails이 없기 때문입니다.
+- Mini Sidebar
+- Tab Header
+- Video List
 
-1. 요청 Popular Videos
-2. 응답 Popular Videos
-3. Videos list에서 channelID 추출, 배열에 저장
-4. (channelID 배열 이용) 요청 channels
-5. 응답 channels
+### 2. Search Page
 
-**Search**
+- Mini Sidebar
+- Video List
 
-1. (input value 이용) 요청 Search
-2. 응답 Search
-3. Search list에서 videoId 추출, 배열에 저장
-4. (videoID 배열 이용) 요청 Popular Videos
-5. 응답 Popular Videos
-6. Videos list에서 videoId만 추출, 배열에 저장
-7. (channelID 배열 이용) 요청 channels
-8. 응답 channels
+### 3. Player Page
+
+- Player
+- Tab List
+- Video List
+
 
 ## 🗂 File Setting
-
+```
 📦src  
 ┣ 📂app -------------------- 함수  
 ┣ 📂assets ----------------- 아이콘 & 이미지  
@@ -67,6 +56,7 @@ https://user-images.githubusercontent.com/69448900/163094834-474ac820-a58a-4e05-
 ┣ 📜Routes.jsx  
 ┣ 📜globalStyles.js -------- CSS Reset Style  
 ┗ 📜index.jsx
+```
 
 ## 🔖 ETC
 
